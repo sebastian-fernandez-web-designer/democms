@@ -1,5 +1,5 @@
 ---
-portfolio_img_1: /img/uploads/misc-flag_of_argentina-522679.jpeg
+portfolio_img_1: /img/uploads/HERMOSA.png
 portfolio_title_1: Stationary
 portfolio_desc_1: A yellow pencil with envelopes on a clean, blue backdrop!
 portfolio_img_2: /img/uploads/blackboard-1846865_1920.jpg
