@@ -94,6 +94,7 @@
   loadSection("cta", {
     cta_background_color: "cta-section",
     cta_title: "cta-title",
+    cta_title_text_color: "cta-title",
     cta_button_1_text: "cta-button-1-text",
     cta_button_1_link: "cta-button-1-link",
     cta_button_2_text: "cta-button-2-text",
