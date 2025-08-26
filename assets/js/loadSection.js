@@ -1,7 +1,4 @@
 //assets/js/loadSection.js
-loadSection.js
-in
-main
 (function() {
   function loadSection(sectionName, mapping) {
     fetch(`content/${sectionName}.md`)
