@@ -8,11 +8,13 @@
         for (const key in mapping) {
           const elementId = mapping[key];
           const el = document.getElementById(elementId);
-          if (el && data[key]) {
+          if (el && typeof data[key] !== 'undefined') {
             if (el.tagName === "IMG") {
               el.src = data[key];
             } else if (el.tagName === "A") {
               el.href = data[key];
+            } else if (el.tagName === "SPAN") {
+              el.innerHTML = data[key].trim(); // <--- LA LÍNEA QUE BUSCAS
             } else {
               el.innerHTML = marked.parse(data[key]);
             }
@@ -39,6 +41,7 @@
     });
     return data;
   }
+})();
 
   //
   // 1) loadSection para todos los bloques de contenido
