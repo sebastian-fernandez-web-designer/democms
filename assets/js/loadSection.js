@@ -1,25 +1,26 @@
 //assets/js/loadSection.js
-(function() {
-  function loadSection(sectionName, mapping) {
-    fetch(`content/${sectionName}.md`)
-      .then(response => response.text())
-      .then(text => {
-        const data = parseFrontMatter(text);
-        for (const key in mapping) {
-          const elementId = mapping[key];
-          const el = document.getElementById(elementId);
-          if (el && data[key]) {
-            if (el.tagName === "IMG") {
-              el.src = data[key];
-            } else if (el.tagName === "A") {
-              el.href = data[key];
-            } else {
-              el.innerHTML = marked.parse(data[key]);
-            }
+function loadSection(sectionName, mapping) {
+  fetch(`content/${sectionName}.md`)
+    .then(response => response.text())
+    .then(text => {
+      const data = parseFrontMatter(text);
+      for (const key in mapping) {
+        const elementId = mapping[key];
+        const el = document.getElementById(elementId);
+        if (el && data[key]) {
+          if (el.tagName === "IMG") {
+            el.src = data[key];
+          } else if (el.tagName === "A") {
+            el.href = data[key];
+          } else if (el.tagName === "SPAN") { // Agregamos esta condición
+            el.innerHTML = data[key]; // No aplicamos marked.parse()
+          } else {
+            el.innerHTML = marked.parse(data[key]);
           }
         }
-      });
-  }
+      }
+    });
+}
 
   function parseFrontMatter(text) {
     const match = text.match(/---\n([\s\S]*?)\n---/);
