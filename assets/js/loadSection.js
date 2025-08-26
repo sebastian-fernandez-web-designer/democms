@@ -9,12 +9,15 @@
           const elementId = mapping[key];
           const el = document.getElementById(elementId);
           if (el && typeof data[key] !== 'undefined') {
+            // Manejar diferentes tipos de elementos y propiedades
             if (el.tagName === "IMG") {
               el.src = data[key];
             } else if (el.tagName === "A") {
               el.href = data[key];
+            } else if (key.includes('_background_color')) { // Nuevo manejo para colores de fondo
+              el.style.backgroundColor = data[key];
             } else if (el.tagName === "SPAN") {
-              el.innerHTML = data[key].trim(); // <--- LA LÍNEA QUE BUSCAS
+              el.innerHTML = data[key].trim();
             } else {
               el.innerHTML = marked.parse(data[key]);
             }
@@ -31,7 +34,6 @@
     lines.forEach(line => {
       const [key, ...rest] = line.split(":");
       if (key && rest.length) {
-        // **CAMBIO AQUÍ**: Quita las comillas al principio y al final del valor
         let value = rest.join(":").trim();
         if (value.startsWith("'") && value.endsWith("'")) {
           value = value.slice(1, -1);
@@ -41,7 +43,6 @@
     });
     return data;
   }
-})();
 
   //
   // 1) loadSection para todos los bloques de contenido
@@ -50,26 +51,27 @@
     header_background: "header-background",
     header_title: "header-title",
     header_subtitle: "header-subtitle",
-    header_button_link: "header-button-link"
+    header_button_link: "header-button-link",
+    header_button_text: "header-button-text"
   });
 
   loadSection("about", {
+    about_background_color: "about-section",
     about_title: "about-title",
     about_subtitle: "about-subtitle",
-    about_button_text: "about-button-text",
-    about_button_link: "about-button-link"
+    about_button_link: "about-button-link",
+    about_button_text: "about-button-text"
   });
 
   loadSection("portfolio", {
     portfolio_img_1: "portfolio-img-1",
     portfolio_img_2: "portfolio-img-2",
     portfolio_img_3: "portfolio-img-3",
-    portfolio_img_4: "portfolio-img-4",
-    portfolio_img_5: "portfolio-img-5",
-    portfolio_img_6: "portfolio-img-6"
+    portfolio_img_4: "portfolio-img-4"
   });
 
   loadSection("services", {
+    services_background_color: "services-section",
     services_subtitle: "services-subtitle",
     services_title: "services-title",
     service_title_1: "service-title-1",
@@ -85,10 +87,12 @@
   loadSection("callout", {
     callout_background: "callout-background",
     callout_title: "callout-title",
-    callout_button_link: "callout-button-link"
+    callout_button_link: "callout-button-link",
+    callout_button_text: "callout-button-text"
   });
 
   loadSection("cta", {
+    cta_background_color: "cta-section",
     cta_title: "cta-title",
     cta_button_1_text: "cta-button-1-text",
     cta_button_1_link: "cta-button-1-link",
@@ -104,7 +108,7 @@
   });
 
   //
-  // 2) Netlify Identity: redirigir si hay token en el hash
+  // Netlify Identity: redirigir si hay token en el hash
   //
   (function() {
     var hash = window.location.hash;
@@ -117,40 +121,4 @@
       window.location.href = '/admin/' + hash;
     }
   })();
-
-  //
-  // 3) Dinámicamente aplicar background-color desde el front-matter
-  //
-  var colorSections = [{
-    file: 'content/about.md',
-    id: 'about-section',
-    field: 'about_background_color'
-  }, {
-    file: 'content/cta.md',
-    id: 'cta-section',
-    field: 'cta_background_color'
-  }, {
-    file: 'content/services.md',
-    id: 'services-section',
-    field: 'services_background_color'
-  }];
-
-  colorSections.forEach(function(item) {
-    fetch(item.file)
-      .then(function(res) {
-        return res.text();
-      })
-      .then(function(text) {
-        var regex = new RegExp(
-          item.field + '\\s*:\\s*[\'"]?(#[0-9A-Fa-f]{6})[\'"]?'
-        );
-        var match = text.match(regex);
-        if (match) {
-          document
-            .getElementById(item.id)
-            .style.backgroundColor = match[1];
-        }
-      })
-      .catch(console.error);
-  });
 })();
