@@ -36,14 +36,16 @@ function loadSection(sectionName, mapping) {
 
 function parseFrontMatter(text) {
   const match = text.match(/---\n([\s\S]*?)\n---/);
-  const yaml  = match ? match[1] : "";
-  const lines = yaml.split("\n");
-  const data  = {};
+  const yaml = match ? match[1] : "";
+  const lines = yaml.split("\n").filter(line => line.trim() !== ''); // Filtra líneas vacías
+  const data = {};
 
   lines.forEach(line => {
-    const [key, ...rest] = line.split(":");
-    if (key && rest.length) {
-      data[key.trim()] = rest.join(":").trim();
+    const firstColonIndex = line.indexOf(":");
+    if (firstColonIndex !== -1) {
+      const key = line.substring(0, firstColonIndex).trim();
+      const value = line.substring(firstColonIndex + 1).trim();
+      data[key] = value;
     }
   });
 
