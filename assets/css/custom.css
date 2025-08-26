@@ -17,5 +17,8 @@
 
 /* Esto es lo que debes agregar */
 #callout-section {
-  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  min-height: 400px; /* Puedes ajustar este valor si lo deseas */
 }
