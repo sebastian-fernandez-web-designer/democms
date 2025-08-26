@@ -1,5 +1,5 @@
 ---
-header_background: /images/pexels-cytonn-955405.jpg
+header_background: /img/uploads/bg-masthead.jpg
 header_title: HOLA
 header_subtitle: Soy un subtítulo..
 header_button_text: Soy texto del botón..
