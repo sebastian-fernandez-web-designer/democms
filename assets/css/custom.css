@@ -15,5 +15,7 @@
   z-index: -1;
 }
 
-
-
+/* Esto es lo que debes agregar */
+#callout-section {
+  min-height: 400px;
+}
