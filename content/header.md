@@ -1,5 +1,5 @@
 ---
-header_background: /img/uploads/uploads/misc-flag_of_argentina-522679.jpeg
+header_background: /img/uploads/misc-flag_of_argentina-522679.jpeg
 header_title: HOLA
 header_subtitle: Soy un subtítulo..
 header_button_text: Soy texto del botón..
