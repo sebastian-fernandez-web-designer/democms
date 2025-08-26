@@ -7,7 +7,7 @@ function loadSection(sectionName, mapping) {
       for (const key in mapping) {
         const elementId = mapping[key];
         const el = document.getElementById(elementId);
-        if (el && typeof data[key] !== 'undefined') {
+        if (el && data[key]) {
           if (el.tagName === "IMG") {
             el.src = data[key];
           } else if (el.tagName === "A") {
