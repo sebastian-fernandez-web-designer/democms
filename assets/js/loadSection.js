@@ -47,7 +47,6 @@
     header_background: "header-background",
     header_title: "header-title",
     header_subtitle: "header-subtitle",
-    header_button_text: "header-button-text",
     header_button_link: "header-button-link"
   });
 
@@ -83,7 +82,6 @@
   loadSection("callout", {
     callout_background: "callout-background",
     callout_title: "callout-title",
-    callout_button_text: "callout-button-text",
     callout_button_link: "callout-button-link"
   });
 
