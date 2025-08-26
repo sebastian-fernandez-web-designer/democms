@@ -14,7 +14,6 @@
             } else if (el.tagName === "A") {
               el.href = data[key];
             } else {
-              // **CAMBIO AQUÍ**: Procesa el Markdown antes de insertarlo
               el.innerHTML = marked.parse(data[key]);
             }
           }
@@ -30,7 +29,12 @@
     lines.forEach(line => {
       const [key, ...rest] = line.split(":");
       if (key && rest.length) {
-        data[key.trim()] = rest.join(":").trim();
+        // **CAMBIO AQUÍ**: Quita las comillas al principio y al final del valor
+        let value = rest.join(":").trim();
+        if (value.startsWith("'") && value.endsWith("'")) {
+          value = value.slice(1, -1);
+        }
+        data[key.trim()] = value;
       }
     });
     return data;
