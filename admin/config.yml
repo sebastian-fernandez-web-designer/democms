@@ -6,7 +6,7 @@ backend:
   base_url: https://api.github.com 
 
 media_folder: "/media"
-public_folder: "/images"
+public_folder: "/img"
 
 collections:
   - name: "site_content"
