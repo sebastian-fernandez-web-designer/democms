@@ -5,7 +5,7 @@ backend:
   token: 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 
   base_url: https://api.github.com 
 
-media_folder: "static/media"
+media_folder: "/media"
 public_folder: "/images"
 
 collections:
