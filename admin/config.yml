@@ -8,9 +8,6 @@ backend:
 media_folder: "img/uploads"     # Carpeta en el repo donde se guardan las imágenes nuevas
 public_folder: "/img/uploads"   # Ruta pública para mostrarlas en la web
 
-locale_dir: "admin/locales"
-locale: "es"
-
 collections:
   - name: "site_content"
     label: "Contenido del sitio"
