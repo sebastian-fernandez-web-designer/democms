@@ -1,9 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8" />
   <title>CMS Admin</title>
+
+  <!-- 1. Cargar browser-image-compression (UMD) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.min.js"
+    crossorigin="anonymous">
+  </script>
+
+  <!-- 2. Snippet de validación, compresión proporcional y re-disparo -->
+  <script>
+    // Umbrales en bytes
+    const MAX_UPLOAD   = 5 * 1024 * 1024; // 5 MB máximo de origen
+    const MIN_COMPRESS = 2 * 1024 * 1024; // 2 MB: sólo comprimimos si excede
+
+    // Formatea bytes en KB/MB para logs y alertas
+    function formatBytes(bytes, decimals = 2) {
+      if (!bytes) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return `${(bytes / Math.pow(k, i)).toFixed(decimals)} ${sizes[i]}`;
+    }
+
+    document.addEventListener('change', e => {
+      const tgt = e.target;
+      if (tgt.tagName !== 'INPUT' || tgt.type !== 'file') return;
+
+      const file = tgt.files[0];
+      if (!file) return;
+
+      // 1) Rechaza archivos > 5 MB
+      if (file.size > MAX_UPLOAD) {
+        alert('Archivo demasiado grande (> 5 MB). Selecciona otro.');
+        tgt.value = '';
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return;
+      }
+
+      // 2) Si está por debajo de 2 MB, procesamos sin compresión
+      if (file.size <= MIN_COMPRESS) return;
+
+      // 3) Interceptamos el flujo original
+      e.stopImmediatePropagation();
+      e.preventDefault();
+
+      const originalSize = file.size;
+      const originalMB   = originalSize / 1024 / 1024;
+      const targetMB     = originalMB * 0.5;     // 50 % del peso original
+
+      alert(
+        `Imagen grande (${formatBytes(originalSize)}). ` +
+        `Se comprimirá al ~50 % ≈ ${targetMB.toFixed(2)} MB`
+      );
+
+      // 4) Compresión dinámica al 50 %
+      window.imageCompression(file, {
+        maxSizeMB:    targetMB,
+        initialQuality: 0.9,      // 90 % de calidad
+        useWebWorker:   true,
+        maxWidthOrHeight: 1920
+      })
+      .then(compressedBlob => {
+        console.log(
+          `Comprimida → Antes: ${formatBytes(originalSize)}, ` +
+          `Después: ${formatBytes(compressedBlob.size)}`
+        );
+
+        // 5) Reemplazamos el File en el input
+        const newFile = new File(
+          [compressedBlob],
+          file.name,
+          { type: file.type }
+        );
+        const dt = new DataTransfer();
+        dt.items.add(newFile);
+        tgt.files = dt.files;
+
+        // 6) Re-disparamos el change para que Sveltia lo procese
+        const evt = new Event('change', { bubbles: true });
+        tgt.dispatchEvent(evt);
+      })
+      .catch(err => {
+        console.error('Error al comprimir:', err);
+        alert('No se pudo comprimir la imagen. Selecciona otro archivo.');
+        tgt.value = '';
+      });
+    }, true);
+  </script>
 </head>
+
 <body>
+  <!-- 3. Carga de Sveltia CMS -->
   <script src="sveltia-cms.js"></script>
 </body>
 </html>
