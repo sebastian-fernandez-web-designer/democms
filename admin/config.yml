@@ -2,25 +2,83 @@ backend:
   name: github
   repo: Sebsatian2025/democms
   branch: main
-  token: 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 
-  base_url: https://api.github.com 
+  token: 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
+  base_url: https://api.github.com
 
-media_folder: "img/uploads"     # Carpeta en el repo donde se guardan las imágenes nuevas
-public_folder: "/img/uploads"   # Ruta pública para mostrarlas en la web
+media_folder: "img/uploads"
+public_folder: "/img/uploads"
 
 collections:
   - name: "site_content"
     label: "Contenido del sitio"
     files:
+
+      # HEADER
       - label: "Header"
         name: "header"
         file: "content/header.md"
         fields:
           - { label: "Imagen de fondo", name: "header_background", widget: "image" }
-          - { label: "Título principal", name: "header_title", widget: "string" }
-          - { label: "Subtítulo", name: "header_subtitle", widget: "string" }
-          - { label: "Texto del botón", name: "header_button_text", widget: "string" }
+          - { label: "Título principal (ES)", name: "header_title_es", widget: "string" }
+          - { label: "Título principal (EN)", name: "header_title_en", widget: "string" }
+          - { label: "Subtítulo (ES)", name: "header_subtitle_es", widget: "string" }
+          - { label: "Subtítulo (EN)", name: "header_subtitle_en", widget: "string" }
+          - { label: "Texto del botón (ES)", name: "header_button_text_es", widget: "string" }
+          - { label: "Texto del botón (EN)", name: "header_button_text_en", widget: "string" }
           - { label: "Enlace del botón", name: "header_button_link", widget: "string" }
+
+      # ABOUT
+      - label: "About"
+        name: "about"
+        file: "content/about.md"
+        fields:
+          - { label: "Color de fondo", name: "about_background_color", widget: "color" }
+          - { label: "Título (ES)", name: "about_title_es", widget: "string" }
+          - { label: "Título (EN)", name: "about_title_en", widget: "string" }
+          - { label: "Subtítulo (ES)", name: "about_subtitle_es", widget: "string" }
+          - { label: "Subtítulo (EN)", name: "about_subtitle_en", widget: "string" }
+          - { label: "Texto del botón (ES)", name: "about_button_text_es", widget: "string" }
+          - { label: "Texto del botón (EN)", name: "about_button_text_en", widget: "string" }
+          - { label: "Enlace del botón", name: "about_button_link", widget: "string" }
+
+      # SERVICES
+      - label: "Services"
+        name: "services"
+        file: "content/services.md"
+        fields:
+          - { label: "Color de fondo", name: "services_background_color", widget: "color" }
+          - { label: "Subtítulo (ES)", name: "services_subtitle_es", widget: "string" }
+          - { label: "Subtítulo (EN)", name: "services_subtitle_en", widget: "string" }
+          - { label: "Título principal (ES)", name: "services_title_es", widget: "string" }
+          - { label: "Título principal (EN)", name: "services_title_en", widget: "string" }
+          - { label: "Título servicio 1 (ES)", name: "service_title_1_es", widget: "string" }
+          - { label: "Título servicio 1 (EN)", name: "service_title_1_en", widget: "string" }
+          - { label: "Descripción servicio 1 (ES)", name: "service_desc_1_es", widget: "string" }
+          - { label: "Descripción servicio 1 (EN)", name: "service_desc_1_en", widget: "string" }
+          - { label: "Título servicio 2 (ES)", name: "service_title_2_es", widget: "string" }
+          - { label: "Título servicio 2 (EN)", name: "service_title_2_en", widget: "string" }
+          - { label: "Descripción servicio 2 (ES)", name: "service_desc_2_es", widget: "string" }
+          - { label: "Descripción servicio 2 (EN)", name: "service_desc_2_en", widget: "string" }
+          - { label: "Título servicio 3 (ES)", name: "service_title_3_es", widget: "string" }
+          - { label: "Título servicio 3 (EN)", name: "service_title_3_en", widget: "string" }
+          - { label: "Descripción servicio 3 (ES)", name: "service_desc_3_es", widget: "string" }
+          - { label: "Descripción servicio 3 (EN)", name: "service_desc_3_en", widget: "string" }
+          - { label: "Título servicio 4 (ES)", name: "service_title_4_es", widget: "string" }
+          - { label: "Título servicio 4 (EN)", name: "service_title_4_en", widget: "string" }
+          - { label: "Descripción servicio 4 (ES)", name: "service_desc_4_es", widget: "string" }
+          - { label: "Descripción servicio 4 (EN)", name: "service_desc_4_en", widget: "string" }
+
+      # CALLOUT
+      - label: "Callout"
+        name: "callout"
+        file: "content/callout.md"
+        fields:
+          - { label: "Título (ES)", name: "callout_title_es", widget: "string" }
+          - { label: "Título (EN)", name: "callout_title_en", widget: "string" }
+          - { label: "Texto del botón (ES)", name: "callout_button_text_es", widget: "string" }
+          - { label: "Texto del botón (EN)", name: "callout_button_text_en", widget: "string" }
+          - { label: "Enlace del botón", name: "callout_button_link", widget: "string" }
+          - { label: "Imagen de fondo", name: "callout_background", widget: "image" }
 
       # PORTFOLIO
       - label: "Portfolio"
@@ -28,28 +86,40 @@ collections:
         file: "content/portfolio.md"
         fields:
           - { label: "Imagen 1", name: "portfolio_img_1", widget: "image" }
-          - { label: "Título imagen 1", name: "portfolio_title_1", widget: "string" }
-          - { label: "Descripción imagen 1", name: "portfolio_desc_1", widget: "string" }
+          - { label: "Título imagen 1 (ES)", name: "portfolio_title_1_es", widget: "string" }
+          - { label: "Título imagen 1 (EN)", name: "portfolio_title_1_en", widget: "string" }
+          - { label: "Descripción imagen 1 (ES)", name: "portfolio_desc_1_es", widget: "string" }
+          - { label: "Descripción imagen 1 (EN)", name: "portfolio_desc_1_en", widget: "string" }
           - { label: "Imagen 2", name: "portfolio_img_2", widget: "image" }
-          - { label: "Título imagen 2", name: "portfolio_title_2", widget: "string" }
-          - { label: "Descripción imagen 2", name: "portfolio_desc_2", widget: "string" }
+          - { label: "Título imagen 2 (ES)", name: "portfolio_title_2_es", widget: "string" }
+          - { label: "Título imagen 2 (EN)", name: "portfolio_title_2_en", widget: "string" }
+          - { label: "Descripción imagen 2 (ES)", name: "portfolio_desc_2_es", widget: "string" }
+          - { label: "Descripción imagen 2 (EN)", name: "portfolio_desc_2_en", widget: "string" }
           - { label: "Imagen 3", name: "portfolio_img_3", widget: "image" }
-          - { label: "Título imagen 3", name: "portfolio_title_3", widget: "string" }
-          - { label: "Descripción imagen 3", name: "portfolio_desc_3", widget: "string" }
+          - { label: "Título imagen 3 (ES)", name: "portfolio_title_3_es", widget: "string" }
+          - { label: "Título imagen 3 (EN)", name: "portfolio_title_3_en", widget: "string" }
+          - { label: "Descripción imagen 3 (ES)", name: "portfolio_desc_3_es", widget: "string" }
+          - { label: "Descripción imagen 3 (EN)", name: "portfolio_desc_3_en", widget: "string" }
           - { label: "Imagen 4", name: "portfolio_img_4", widget: "image" }
-          - { label: "Título imagen 4", name: "portfolio_title_4", widget: "string" }
-          - { label: "Descripción imagen 4", name: "portfolio_desc_4", widget: "string" }
+          - { label: "Título imagen 4 (ES)", name: "portfolio_title_4_es", widget: "string" }
+          - { label: "Título imagen 4 (EN)", name: "portfolio_title_4_en", widget: "string" }
+          - { label: "Descripción imagen 4 (ES)", name: "portfolio_desc_4_es", widget: "string" }
+          - { label: "Descripción imagen 4 (EN)", name: "portfolio_desc_4_en", widget: "string" }
 
-      # ABOUT
-      - label: "About"
-        name: "about"
-        file: "content/about.md"
+      # CTA
+      - label: "Call to Action"
+        name: "cta"
+        file: "content/cta.md"
         fields:
-          - { label: "Color de fondo", name: "about_background_color", widget: "color" } # Sin valor por defecto
-          - { label: "Título", name: "about_title", widget: "string" }
-          - { label: "Subtítulo", name: "about_subtitle", widget: "string" }
-          - { label: "Texto del botón", name: "about_button_text", widget: "string" }
-          - { label: "Enlace del botón", name: "about_button_link", widget: "string" }
+          - { label: "Color de fondo", name: "cta_background_color", widget: "color" }
+          - { label: "Título (ES)", name: "cta_title_es", widget: "string" }
+          - { label: "Título (EN)", name: "cta_title_en", widget: "string" }
+          - { label: "Texto botón 1 (ES)", name: "cta_button_1_text_es", widget: "string" }
+          - { label: "Texto botón 1 (EN)", name: "cta_button_1_text_en", widget: "string" }
+          - { label: "Enlace botón 1", name: "cta_button_1_link", widget: "string" }
+          - { label: "Texto botón 2 (ES)", name: "cta_button_2_text_es", widget: "string" }
+          - { label: "Texto botón 2 (EN)", name: "cta_button_2_text_en", widget: "string" }
+          - { label: "Enlace botón 2", name: "cta_button_2_link", widget: "string" }
 
       # FOOTER
       - label: "Footer"
@@ -59,45 +129,5 @@ collections:
           - { label: "Enlace Facebook", name: "footer_link_facebook", widget: "string" }
           - { label: "Enlace Twitter", name: "footer_link_twitter", widget: "string" }
           - { label: "Enlace GitHub", name: "footer_link_github", widget: "string" }
-          - { label: "Texto copyright", name: "footer_copy_text", widget: "string" }
-
-      # SERVICES
-      - label: "Services"
-        name: "services"
-        file: "content/services.md"
-        fields:
-          - { label: "Color de fondo", name: "services_background_color", widget: "color" } # Sin valor por defecto
-          - { label: "Subtítulo", name: "services_subtitle", widget: "string" }
-          - { label: "Título principal", name: "services_title", widget: "string" }
-          - { label: "Título servicio 1", name: "service_title_1", widget: "string" }
-          - { label: "Descripción servicio 1", name: "service_desc_1", widget: "string" }
-          - { label: "Título servicio 2", name: "service_title_2", widget: "string" }
-          - { label: "Descripción servicio 2", name: "service_desc_2", widget: "string" }
-          - { label: "Título servicio 3", name: "service_title_3", widget: "string" }
-          - { label: "Descripción servicio 3", name: "service_desc_3", widget: "string" }
-          - { label: "Título servicio 4", name: "service_title_4", widget: "string" }
-          - { label: "Descripción servicio 4", name: "service_desc_4", widget: "string" }
-
-      # CALLOUT
-      - label: "Callout"
-        name: "callout"
-        file: "content/callout.md"
-        fields:
-          - { label: "Título", name: "callout_title", widget: "markdown" }
-          - { label: "Texto del botón", name: "callout_button_text", widget: "string" }
-          - { label: "Enlace del botón", name: "callout_button_link", widget: "string" }
-          - { label: "Imagen de fondo", name: "callout_background", widget: "image" }
-
-      # CTA
-      - label: "Call to Action"
-        name: "cta"
-        file: "content/cta.md"
-        fields:
-          - { label: "Color de fondo", name: "cta_background_color", widget: "color" } # Sin valor por defecto
-          - { label: "Título", name: "cta_title", widget: "string" }
-          - { label: "Color de texto", name: "cta_title_text_color", widget: "color" }
-          - { label: "Texto botón 1", name: "cta_button_1_text", widget: "string" }
-          - { label: "Enlace botón 1", name: "cta_button_1_link", widget: "string" }
-          - { label: "Texto botón 2", name: "cta_button_2_text", widget: "string" }
-          - { label: "Enlace botón 2", name: "cta_button_2_link", widget: "string" }
-
+          - { label: "Texto copyright (ES)", name: "footer_copy_text_es", widget: "string" }
+          - { label: "Texto copyright (EN)", name: "footer_copy_text_en", widget: "string" }
