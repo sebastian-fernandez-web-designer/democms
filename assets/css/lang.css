@@ -1,0 +1,17 @@
+.lang-es, .lang-en {
+    transition: opacity 0.3s ease;
+}
+body.lang-es .lang-en {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+body.lang-en .lang-es {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+body.lang-es .lang-es, body.lang-en .lang-en {
+    opacity: 1;
+    height: auto;
+}
