@@ -1,17 +1,22 @@
+/* Contenedores de idioma */
 .lang-es, .lang-en {
+    position: absolute;       /* Se superponen en el mismo lugar */
+    top: 0;
+    left: 0;
+    width: 100%;              /* Ocupan todo el ancho del contenedor padre */
     transition: opacity 0.3s ease;
 }
-body.lang-es .lang-en {
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-}
+
+/* Idioma oculto */
+body.lang-es .lang-en,
 body.lang-en .lang-es {
     opacity: 0;
-    height: 0;
-    overflow: hidden;
+    pointer-events: none;     /* Evita interacción con el texto invisible */
 }
-body.lang-es .lang-es, body.lang-en .lang-en {
+
+/* Idioma visible */
+body.lang-es .lang-es,
+body.lang-en .lang-en {
     opacity: 1;
-    height: auto;
+    pointer-events: auto;
 }
