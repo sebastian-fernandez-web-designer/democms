@@ -62,13 +62,24 @@ loadSection("header", {
 });
 
 
-  loadSection("about", {
-    about_background_color: "about-section",
-    [`about_title_${currentLang}`]: "about-title",
-    [`about_subtitle_${currentLang}`]: "about-subtitle",
-    about_button_link: "about-button-link",
-    [`about_button_text_${currentLang}`]: "about-button-text"
-  });
+loadSection("about", {
+  // Color de fondo
+  about_background_color: "about-section",
+
+  // Títulos
+  about_title_es: "about-title",
+  about_title_en: "about-title-en",
+
+  // Subtítulos / párrafos
+  about_subtitle_es: "about-subtitle",
+  about_subtitle_en: "about-subtitle-en",
+
+  // Botón
+  about_button_link: "about-button-link",
+  about_button_text_es: "about-button-text",
+  about_button_text_en: "about-button-text-en"
+});
+
 
 loadSection("portfolio", {
   // Imagenes
