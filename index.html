@@ -25,15 +25,6 @@
                 <ul class="navbar-nav sidebar-nav" id="sidebar-nav">
                     <li class="nav-item sidebar-brand"><a class="nav-link active" href="#page-top"><span class="lang-es">Mi Marca</span><span class="lang-en">My Brand</span></a></li>
                     <li class="nav-item sidebar-nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    🌐 <span class="lang-es">Idioma</span><span class="lang-en">Language</span>
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="langDropdown">
-    <li><a class="dropdown-item lang-option" data-lang="es">🇪🇸 Español</a></li>
-    <li><a class="dropdown-item lang-option" data-lang="en">🇬🇧 English</a></li>
-  </ul>
-</li>
-
                     <li class="nav-item sidebar-nav-item"><a class="nav-link" href="#page-top"><span class="lang-es">Inicio</span><span class="lang-en">Home</span></a></li>
                     <li class="nav-item sidebar-nav-item"><a class="nav-link" href="#about"><span class="lang-es">Acerca</span><span class="lang-en">About</span></a></li>
                     <li class="nav-item sidebar-nav-item"><a class="nav-link" href="#services"><span class="lang-es">Servicios</span><span class="lang-en">Services</span></a></li>
@@ -43,7 +34,19 @@
             </div>
         </div>
     </nav>
-
+<!-- Selector de idioma fijo -->
+<div class="lang-selector-fixed">
+  <div class="dropdown">
+    <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      🌐 <span class="lang-es">Idioma</span><span class="lang-en">Language</span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="langDropdown">
+      <li><a class="dropdown-item lang-option" data-lang="es">🇪🇸 Español</a></li>
+      <li><a class="dropdown-item lang-option" data-lang="en">🇬🇧 English</a></li>
+    </ul>
+  </div>
+</div>
+    
     <!-- HEADER -->
     <header id="header-section" class="d-flex masthead" style="position: relative; overflow: hidden;">
         <img id="header-background" src="img/uploads/bg-masthead.jpg" alt="Fondo Header" class="header-cover" />
