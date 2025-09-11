@@ -70,20 +70,38 @@ loadSection("header", {
     [`about_button_text_${currentLang}`]: "about-button-text"
   });
 
-  loadSection("portfolio", {
-    portfolio_img_1: "portfolio-img-1",
-    [`portfolio_title_1_${currentLang}`]: "portfolio-title-1",
-    [`portfolio_desc_1_${currentLang}`]: "portfolio-desc-1",
-    portfolio_img_2: "portfolio-img-2",
-    [`portfolio_title_2_${currentLang}`]: "portfolio-title-2",
-    [`portfolio_desc_2_${currentLang}`]: "portfolio-desc-2",
-    portfolio_img_3: "portfolio-img-3",
-    [`portfolio_title_3_${currentLang}`]: "portfolio-title-3",
-    [`portfolio_desc_3_${currentLang}`]: "portfolio-desc-3",
-    portfolio_img_4: "portfolio-img-4",
-    [`portfolio_title_4_${currentLang}`]: "portfolio-title-4",
-    [`portfolio_desc_4_${currentLang}`]: "portfolio-desc-4"
-  });
+loadSection("portfolio", {
+  // Imagenes
+  portfolio_img_1: "portfolio-img-1",
+  portfolio_img_2: "portfolio-img-2",
+  portfolio_img_3: "portfolio-img-3",
+  portfolio_img_4: "portfolio-img-4",
+
+  // Títulos en español
+  portfolio_title_1_es: "portfolio-title-1",
+  portfolio_title_2_es: "portfolio-title-2",
+  portfolio_title_3_es: "portfolio-title-3",
+  portfolio_title_4_es: "portfolio-title-4",
+
+  // Títulos en inglés
+  portfolio_title_1_en: "portfolio-title-1-en",
+  portfolio_title_2_en: "portfolio-title-2-en",
+  portfolio_title_3_en: "portfolio-title-3-en",
+  portfolio_title_4_en: "portfolio-title-4-en",
+
+  // Descripciones en español
+  portfolio_desc_1_es: "portfolio-desc-1",
+  portfolio_desc_2_es: "portfolio-desc-2",
+  portfolio_desc_3_es: "portfolio-desc-3",
+  portfolio_desc_4_es: "portfolio-desc-4",
+
+  // Descripciones en inglés
+  portfolio_desc_1_en: "portfolio-desc-1-en",
+  portfolio_desc_2_en: "portfolio-desc-2-en",
+  portfolio_desc_3_en: "portfolio-desc-3-en",
+  portfolio_desc_4_en: "portfolio-desc-4-en"
+});
+
 
   loadSection("services", {
     services_background_color: "services-section",
