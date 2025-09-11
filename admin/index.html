@@ -10,13 +10,11 @@
     crossorigin="anonymous">
   </script>
 
-  <!-- 2. Snippet de validación, compresión proporcional y re-disparo -->
+  <!-- 2. Validación y compresión de imágenes -->
   <script>
-    // Umbrales en bytes
-    const MAX_UPLOAD   = 5 * 1024 * 1024; // 5 MB máximo de origen
-    const MIN_COMPRESS = 2 * 1024 * 1024; // 2 MB: sólo comprimimos si excede
+    const MAX_UPLOAD   = 5 * 1024 * 1024; // 5 MB máximo
+    const MIN_COMPRESS = 2 * 1024 * 1024; // 2 MB mínimo para comprimir
 
-    // Formatea bytes en KB/MB para logs y alertas
     function formatBytes(bytes, decimals = 2) {
       if (!bytes) return '0 Bytes';
       const k = 1024;
@@ -32,7 +30,6 @@
       const file = tgt.files[0];
       if (!file) return;
 
-      // 1) Rechaza archivos > 5 MB
       if (file.size > MAX_UPLOAD) {
         alert('Archivo demasiado grande (> 5 MB). Selecciona otro.');
         tgt.value = '';
@@ -41,46 +38,30 @@
         return;
       }
 
-      // 2) Si está por debajo de 2 MB, procesamos sin compresión
       if (file.size <= MIN_COMPRESS) return;
 
-      // 3) Interceptamos el flujo original
       e.stopImmediatePropagation();
       e.preventDefault();
 
       const originalSize = file.size;
-      const originalMB   = originalSize / 1024 / 1024;
-      const targetMB     = originalMB * 0.5;     // 50 % del peso original
+      const targetMB     = (originalSize / 1024 / 1024) * 0.5;
 
-      alert(
-        `Imagen grande (${formatBytes(originalSize)}). ` +
-        `Se comprimirá al ~50 % ≈ ${targetMB.toFixed(2)} MB`
-      );
+      alert(`Imagen grande (${formatBytes(originalSize)}). Se comprimirá al ~50 % ≈ ${targetMB.toFixed(2)} MB`);
 
-      // 4) Compresión dinámica al 50 %
       window.imageCompression(file, {
-        maxSizeMB:    targetMB,
-        initialQuality: 0.9,      // 90 % de calidad
-        useWebWorker:   true,
+        maxSizeMB: targetMB,
+        initialQuality: 0.9,
+        useWebWorker: true,
         maxWidthOrHeight: 1920
       })
       .then(compressedBlob => {
-        console.log(
-          `Comprimida → Antes: ${formatBytes(originalSize)}, ` +
-          `Después: ${formatBytes(compressedBlob.size)}`
-        );
+        console.log(`Comprimida → Antes: ${formatBytes(originalSize)}, Después: ${formatBytes(compressedBlob.size)}`);
 
-        // 5) Reemplazamos el File en el input
-        const newFile = new File(
-          [compressedBlob],
-          file.name,
-          { type: file.type }
-        );
+        const newFile = new File([compressedBlob], file.name, { type: file.type });
         const dt = new DataTransfer();
         dt.items.add(newFile);
         tgt.files = dt.files;
 
-        // 6) Re-disparamos el change para que Sveltia lo procese
         const evt = new Event('change', { bubbles: true });
         tgt.dispatchEvent(evt);
       })
@@ -94,7 +75,65 @@
 </head>
 
 <body>
-  <!-- 3. Carga de Sveltia CMS -->
+  <!-- 3. Botón secreto y temporizador -->
+  <div id="admin-controls" style="display: none; margin-top: 20px;">
+    <button id="start-demo-btn" style="padding: 10px; background: #222; color: #fff; border: none; border-radius: 5px;">
+      🔐 Iniciar demo (15 min)
+    </button>
+  </div>
+
+  <p id="demo-timer" style="font-weight: bold; color: #fff; margin-top: 10px;">Tiempo restante: --</p>
+
+  <!-- 4. Carga de Sveltia CMS -->
   <script src="sveltia-cms.js"></script>
+
+  <!-- 5. Temporizador con persistencia y botón secreto -->
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const isAdmin = params.get("admin") === "true";
+
+    if (isAdmin) {
+      document.getElementById("admin-controls").style.display = "block";
+    }
+
+    let sessionStart = parseInt(localStorage.getItem("demoSessionStart")) || null;
+    let intervalId;
+
+    function startTimer() {
+      sessionStart = Date.now();
+      localStorage.setItem("demoSessionStart", sessionStart);
+      runTimer();
+      alert("⏱️ Temporizador iniciado. El token expira en 15 minutos.");
+    }
+
+    function runTimer() {
+      clearInterval(intervalId);
+      intervalId = setInterval(() => {
+        if (!sessionStart) return;
+
+        const sessionDuration = 15 * 60 * 1000;
+        const sessionEnd = sessionStart + sessionDuration;
+        const now = Date.now();
+        const remaining = sessionEnd - now;
+
+        const timerEl = document.getElementById("demo-timer");
+        if (!timerEl) return;
+
+        if (remaining <= 0) {
+          timerEl.textContent = "⏳ Tu sesión ha expirado.";
+          clearInterval(intervalId);
+          return;
+        }
+
+        const minutes = Math.floor(remaining / 1000 / 60);
+        const seconds = Math.floor((remaining / 1000) % 60);
+        timerEl.textContent = `⏱️ Tiempo restante: ${minutes}m ${seconds}s`;
+      }, 1000);
+    }
+
+    document.getElementById("start-demo-btn").addEventListener("click", startTimer);
+
+    if (sessionStart) runTimer();
+  </script>
 </body>
 </html>
