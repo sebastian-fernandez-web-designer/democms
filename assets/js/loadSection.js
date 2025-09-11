@@ -46,60 +46,69 @@
     return data;
   }
 
+  // 1) loadSection para todos los bloques de contenido (adaptado bilingüe)
   //
-  // 1) loadSection para todos los bloques de contenido
-  //
+  const currentLang = document.body.classList.contains("lang-en") ? "en" : "es";
+
   loadSection("header", {
     header_background: "header-background",
-    header_title: "header-title",
-    header_subtitle: "header-subtitle",
+    [`header_title_${currentLang}`]: "header-title",
+    [`header_subtitle_${currentLang}`]: "header-subtitle",
     header_button_link: "header-button-link",
-    header_button_text: "header-button-text"
+    [`header_button_text_${currentLang}`]: "header-button-text"
   });
 
   loadSection("about", {
     about_background_color: "about-section",
-    about_title: "about-title",
-    about_subtitle: "about-subtitle",
+    [`about_title_${currentLang}`]: "about-title",
+    [`about_subtitle_${currentLang}`]: "about-subtitle",
     about_button_link: "about-button-link",
-    about_button_text: "about-button-text"
+    [`about_button_text_${currentLang}`]: "about-button-text"
   });
 
   loadSection("portfolio", {
     portfolio_img_1: "portfolio-img-1",
+    [`portfolio_title_1_${currentLang}`]: "portfolio-title-1",
+    [`portfolio_desc_1_${currentLang}`]: "portfolio-desc-1",
     portfolio_img_2: "portfolio-img-2",
+    [`portfolio_title_2_${currentLang}`]: "portfolio-title-2",
+    [`portfolio_desc_2_${currentLang}`]: "portfolio-desc-2",
     portfolio_img_3: "portfolio-img-3",
-    portfolio_img_4: "portfolio-img-4"
+    [`portfolio_title_3_${currentLang}`]: "portfolio-title-3",
+    [`portfolio_desc_3_${currentLang}`]: "portfolio-desc-3",
+    portfolio_img_4: "portfolio-img-4",
+    [`portfolio_title_4_${currentLang}`]: "portfolio-title-4",
+    [`portfolio_desc_4_${currentLang}`]: "portfolio-desc-4"
   });
 
   loadSection("services", {
     services_background_color: "services-section",
-    services_subtitle: "services-subtitle",
-    services_title: "services-title",
-    service_title_1: "service-title-1",
-    service_desc_1: "service-desc-1",
-    service_title_2: "service-title-2",
-    service_desc_2: "service-desc-2",
-    service_title_3: "service-title-3",
-    service_desc_3: "service-desc-3",
-    service_title_4: "service-title-4",
-    service_desc_4: "service-desc-4"
+    [`services_subtitle_${currentLang}`]: "services-subtitle",
+    [`services_title_${currentLang}`]: "services-title",
+    [`service_title_1_${currentLang}`]: "service-title-1",
+    [`service_desc_1_${currentLang}`]: "service-desc-1",
+    [`service_title_2_${currentLang}`]: "service-title-2",
+    [`service_desc_2_${currentLang}`]: "service-desc-2",
+    [`service_title_3_${currentLang}`]: "service-title-3",
+    [`service_desc_3_${currentLang}`]: "service-desc-3",
+    [`service_title_4_${currentLang}`]: "service-title-4",
+    [`service_desc_4_${currentLang}`]: "service-desc-4"
   });
 
   loadSection("callout", {
     callout_background: "callout-background",
-    callout_title: "callout-title",
+    [`callout_title_${currentLang}`]: "callout-title",
     callout_button_link: "callout-button-link",
-    callout_button_text: "callout-button-text"
+    [`callout_button_text_${currentLang}`]: "callout-button-text"
   });
 
   loadSection("cta", {
     cta_background_color: "cta-section",
-    cta_title: "cta-title",
+    [`cta_title_${currentLang}`]: "cta-title",
     cta_title_text_color: "cta-title",
-    cta_button_1_text: "cta-button-1-text",
+    [`cta_button_1_text_${currentLang}`]: "cta-button-1-text",
     cta_button_1_link: "cta-button-1-link",
-    cta_button_2_text: "cta-button-2-text",
+    [`cta_button_2_text_${currentLang}`]: "cta-button-2-text",
     cta_button_2_link: "cta-button-2-link"
   });
 
@@ -107,10 +116,9 @@
     footer_link_facebook: "footer-link-facebook",
     footer_link_twitter: "footer-link-twitter",
     footer_link_github: "footer-link-github",
-    footer_copy_text: "footer-copy-text"
+    [`footer_copy_text_${currentLang}`]: "footer-copy-text"
   });
 
-  //
   // Netlify Identity: redirigir si hay token en el hash
   //
   (function() {
