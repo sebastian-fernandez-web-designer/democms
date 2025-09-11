@@ -1,8 +1,10 @@
 ---
 about_background_color: '#ffffff'
-about_title: Stylish Portfolio is the perfect theme for your next project!
-about_subtitle: This theme features a flexible, UX friendly sidebar menu and stock photos from our friends at Unsplash.
-about_button_text: Texto boton
-about_button_link: '#services'
+about_title_es: Nuestro Portafolio es Perfecto para tu Próximo Proyecto
+about_title_en: Our Portfolio is Perfect for Your Next Project
+about_subtitle_es: Este tema cuenta con un menú lateral flexible y fotos de stock gratuitas.
+about_subtitle_en: This theme features a flexible sidebar menu and free stock photos.
+about_button_text_es: Lo Que Ofrecemos
+about_button_text_en: What We Offer
+about_button_link: "#services"
 ---
-
