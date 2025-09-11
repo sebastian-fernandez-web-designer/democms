@@ -165,15 +165,26 @@ loadSection("callout", {
 });
 
 
-  loadSection("cta", {
-    cta_background_color: "cta-section",
-    [`cta_title_${currentLang}`]: "cta-title",
-    cta_title_text_color: "cta-title",
-    [`cta_button_1_text_${currentLang}`]: "cta-button-1-text",
-    cta_button_1_link: "cta-button-1-link",
-    [`cta_button_2_text_${currentLang}`]: "cta-button-2-text",
-    cta_button_2_link: "cta-button-2-link"
-  });
+loadSection("cta", {
+  // Color de fondo y color de texto
+  cta_background_color: "cta-section",
+  cta_title_text_color: "cta-title",
+
+  // Título
+  cta_title_es: "cta-title",
+  cta_title_en: "cta-title-en",
+
+  // Botón 1
+  cta_button_1_text_es: "cta-button-1-text",
+  cta_button_1_text_en: "cta-button-1-text-en",
+  cta_button_1_link: "cta-button-1-link",
+
+  // Botón 2
+  cta_button_2_text_es: "cta-button-2-text",
+  cta_button_2_text_en: "cta-button-2-text-en",
+  cta_button_2_link: "cta-button-2-link"
+});
+
 
   loadSection("footer", {
     footer_link_facebook: "footer-link-facebook",
