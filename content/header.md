@@ -1,5 +1,5 @@
 ---
-header_background: /img/uploads/blackboard-1846865_1920.jpg
+header_background: /img/uploads/bg-masthead.jpg
 header_title_es: Bienvenido a Mi Portafolio.
 header_title_en: Welcome to My Portfolio.
 header_subtitle_es: Un tema gratuito de Bootstrap.
