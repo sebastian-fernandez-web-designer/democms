@@ -21,3 +21,14 @@
   height: 100vh;
   min-height: 400px; 
 }
+
+.lang-selector-fixed {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1050; /* Por encima del header y sidebar */
+}
+.lang-selector-fixed .btn {
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+}
