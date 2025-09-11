@@ -22,15 +22,49 @@
   min-height: 400px; 
 }
 
-.lang-selector-fixed .btn {
-  font-size: 0.9rem;
-  padding: 0.25rem 0.5rem;
-  cursor: pointer; /* hace que el cursor cambie a mano */
-  transition: background-color 0.2s, transform 0.1s; /* efecto suave */
+/* Contenedor fijo del selector de idioma */
+.lang-selector-fixed {
+  position: fixed;        /* Para que quede fijo en la pantalla */
+  top: 15px;              /* Distancia desde el top */
+  left: 15px;             /* Distancia desde la izquierda */
+  z-index: 1050;          /* Por encima de header, sidebar y demás elementos */
 }
 
+/* Estilo del botón principal del selector */
+.lang-selector-fixed .btn {
+  font-size: 0.9rem;            /* Tamaño de texto más pequeño */
+  padding: 0.25rem 0.5rem;      /* Espaciado interno */
+  cursor: pointer;              /* Cambia el cursor al pasar por encima */
+  background-color: #ffffff;    /* Color de fondo del botón */
+  border: 1px solid #ccc;       /* Borde sutil */
+  border-radius: 0.25rem;       /* Bordes redondeados */
+  transition: background-color 0.2s, transform 0.1s; /* Transición suave */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra leve para destacarlo */
+}
+
+/* Hover: efecto visual cuando se pasa el mouse */
 .lang-selector-fixed .btn:hover {
-  background-color: #e0e0e0; /* cambio de color al pasar el mouse */
-  transform: translateY(-1px); /* efecto sutil de “levantarse” */
+  background-color: #e0e0e0;  /* Fondo más oscuro al pasar el mouse */
+  transform: translateY(-1px); /* Pequeño “levantamiento” */
+}
+
+/* Dropdown del selector */
+.lang-selector-fixed .dropdown-menu {
+  min-width: 120px;            /* Ancho mínimo */
+  border-radius: 0.25rem;      /* Bordes redondeados */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Sombra leve */
+}
+
+/* Items del dropdown */
+.lang-selector-fixed .dropdown-item {
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+/* Hover de cada opción */
+.lang-selector-fixed .dropdown-item:hover {
+  background-color: #f0f0f0;
 }
 
