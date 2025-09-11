@@ -50,13 +50,17 @@
   //
   const currentLang = document.body.classList.contains("lang-en") ? "en" : "es";
 
-  loadSection("header", {
-    header_background: "header-background",
-    [`header_title_${currentLang}`]: "header-title",
-    [`header_subtitle_${currentLang}`]: "header-subtitle",
-    header_button_link: "header-button-link",
-    [`header_button_text_${currentLang}`]: "header-button-text"
-  });
+loadSection("header", {
+  header_background: "header-background",
+  header_title_es: "header-title",
+  header_title_en: "header-title-en",
+  header_subtitle_es: "header-subtitle",
+  header_subtitle_en: "header-subtitle-en",
+  header_button_link: "header-button-link",
+  header_button_text_es: "header-button-text",
+  header_button_text_en: "header-button-text-en"
+});
+
 
   loadSection("about", {
     about_background_color: "about-section",
