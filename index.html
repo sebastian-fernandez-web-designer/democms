@@ -302,14 +302,19 @@
       const remaining = sessionEnd - now;
 
       const timerEl = document.getElementById("demo-timer");
-      if (!timerEl) return;
+      const buttonEl = document.getElementById("start-demo-btn");
+
+      if (!timerEl || !buttonEl) return;
 
       if (remaining <= 0) {
         timerEl.textContent = "⏳ Tu sesión ha expirado.";
+        buttonEl.style.display = "inline-block"; // Mostrar el botón nuevamente
+        localStorage.removeItem("demoSessionStart"); // Limpiar la sesión
         clearInterval(intervalId);
         return;
       }
 
+      buttonEl.style.display = "none"; // Ocultar mientras corre
       const minutes = Math.floor(remaining / 1000 / 60);
       const seconds = Math.floor((remaining / 1000) % 60);
       timerEl.textContent = `⏱️ Tiempo restante: ${minutes}m ${seconds}s`;
@@ -318,7 +323,13 @@
 
   document.getElementById("start-demo-btn").addEventListener("click", startTimer);
 
-  if (sessionStart) runTimer();
+  // Si ya hay sesión activa, arrancar el temporizador
+  if (sessionStart) {
+    runTimer();
+  } else {
+    // Si no hay sesión, mostrar el botón
+    document.getElementById("start-demo-btn").style.display = "inline-block";
+  }
 </script>
 
     <!-- Scripts -->
