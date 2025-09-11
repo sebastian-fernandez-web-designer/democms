@@ -150,12 +150,20 @@ loadSection("services", {
 });
 
 
-  loadSection("callout", {
-    callout_background: "callout-background",
-    [`callout_title_${currentLang}`]: "callout-title",
-    callout_button_link: "callout-button-link",
-    [`callout_button_text_${currentLang}`]: "callout-button-text"
-  });
+loadSection("callout", {
+  // Imagen de fondo
+  callout_background: "callout-background",
+
+  // Títulos
+  callout_title_es: "callout-title",
+  callout_title_en: "callout-title-en",
+
+  // Botón
+  callout_button_link: "callout-button-link",
+  callout_button_text_es: "callout-button-text",
+  callout_button_text_en: "callout-button-text-en"
+});
+
 
   loadSection("cta", {
     cta_background_color: "cta-section",
