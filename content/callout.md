@@ -1,7 +1,8 @@
 ---
-callout_title: '### Welcome to your next website!'
-callout_button_text: Descargame ahora
-callout_button_link: '#ads'
+callout_title_es: Bienvenido al nuevo sitio web
+callout_title_en: Welcome to the new website
+callout_button_text_es: Descargar Ahora
+callout_button_text_en: Download Now!
+callout_button_link: "#"
 callout_background: /img/uploads/bg-callout.jpg
 ---
-
