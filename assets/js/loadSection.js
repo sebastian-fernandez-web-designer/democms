@@ -186,12 +186,17 @@ loadSection("cta", {
 });
 
 
-  loadSection("footer", {
-    footer_link_facebook: "footer-link-facebook",
-    footer_link_twitter: "footer-link-twitter",
-    footer_link_github: "footer-link-github",
-    [`footer_copy_text_${currentLang}`]: "footer-copy-text"
-  });
+loadSection("footer", {
+  // Redes sociales
+  footer_link_facebook: "footer-link-facebook",
+  footer_link_twitter: "footer-link-twitter",
+  footer_link_github: "footer-link-github",
+
+  // Texto legal
+  footer_copy_text_es: "footer-copy-text",
+  footer_copy_text_en: "footer-copy-text-en"
+});
+
 
   // Netlify Identity: redirigir si hay token en el hash
   //
