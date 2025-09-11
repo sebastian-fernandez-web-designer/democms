@@ -114,19 +114,41 @@ loadSection("portfolio", {
 });
 
 
-  loadSection("services", {
-    services_background_color: "services-section",
-    [`services_subtitle_${currentLang}`]: "services-subtitle",
-    [`services_title_${currentLang}`]: "services-title",
-    [`service_title_1_${currentLang}`]: "service-title-1",
-    [`service_desc_1_${currentLang}`]: "service-desc-1",
-    [`service_title_2_${currentLang}`]: "service-title-2",
-    [`service_desc_2_${currentLang}`]: "service-desc-2",
-    [`service_title_3_${currentLang}`]: "service-title-3",
-    [`service_desc_3_${currentLang}`]: "service-desc-3",
-    [`service_title_4_${currentLang}`]: "service-title-4",
-    [`service_desc_4_${currentLang}`]: "service-desc-4"
-  });
+loadSection("services", {
+  // Color de fondo
+  services_background_color: "services-section",
+
+  // Encabezados
+  services_subtitle_es: "services-subtitle",
+  services_subtitle_en: "services-subtitle-en",
+  services_title_es: "services-title",
+  services_title_en: "services-title-en",
+
+  // Servicio 1
+  service_title_1_es: "service-title-1",
+  service_title_1_en: "service-title-1-en",
+  service_desc_1_es: "service-desc-1",
+  service_desc_1_en: "service-desc-1-en",
+
+  // Servicio 2
+  service_title_2_es: "service-title-2",
+  service_title_2_en: "service-title-2-en",
+  service_desc_2_es: "service-desc-2",
+  service_desc_2_en: "service-desc-2-en",
+
+  // Servicio 3
+  service_title_3_es: "service-title-3",
+  service_title_3_en: "service-title-3-en",
+  service_desc_3_es: "service-desc-3",
+  service_desc_3_en: "service-desc-3-en",
+
+  // Servicio 4
+  service_title_4_es: "service-title-4",
+  service_title_4_en: "service-title-4-en",
+  service_desc_4_es: "service-desc-4",
+  service_desc_4_en: "service-desc-4-en"
+});
+
 
   loadSection("callout", {
     callout_background: "callout-background",
