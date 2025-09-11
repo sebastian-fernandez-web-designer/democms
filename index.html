@@ -264,7 +264,62 @@
   </div>
   <a class="rounded scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </footer>
+<!-- Footer con botón de activación -->
+<footer style="position: fixed; bottom: 0; left: 0; width: 100%; background: #222; padding: 12px; text-align: center; z-index: 999;">
+  <button id="start-demo-btn" style="padding: 10px 16px; background: #00c896; color: #fff; border: none; border-radius: 6px; font-weight: bold;">
+    🔐 Activar temporizador de demo
+  </button>
+</footer>
 
+<!-- Temporizador visual -->
+<p id="demo-timer" style="position: fixed; bottom: 60px; right: 20px; font-weight: bold; color: #fff; background: #444; padding: 6px 10px; border-radius: 4px;">
+  Tiempo restante: --
+</p>
+
+<!-- Script del temporizador -->
+<script>
+  let sessionStart = parseInt(localStorage.getItem("demoSessionStart")) || null;
+  let intervalId;
+
+  function startTimer() {
+    sessionStart = Date.now();
+    localStorage.setItem("demoSessionStart", sessionStart);
+    runTimer();
+    alert("⏱️ Temporizador iniciado. El token expira en 15 minutos.");
+
+    // Ocultar el botón después de activarlo
+    document.getElementById("start-demo-btn").style.display = "none";
+  }
+
+  function runTimer() {
+    clearInterval(intervalId);
+    intervalId = setInterval(() => {
+      if (!sessionStart) return;
+
+      const sessionDuration = 15 * 60 * 1000;
+      const sessionEnd = sessionStart + sessionDuration;
+      const now = Date.now();
+      const remaining = sessionEnd - now;
+
+      const timerEl = document.getElementById("demo-timer");
+      if (!timerEl) return;
+
+      if (remaining <= 0) {
+        timerEl.textContent = "⏳ Tu sesión ha expirado.";
+        clearInterval(intervalId);
+        return;
+      }
+
+      const minutes = Math.floor(remaining / 1000 / 60);
+      const seconds = Math.floor((remaining / 1000) % 60);
+      timerEl.textContent = `⏱️ Tiempo restante: ${minutes}m ${seconds}s`;
+    }, 1000);
+  }
+
+  document.getElementById("start-demo-btn").addEventListener("click", startTimer);
+
+  if (sessionStart) runTimer();
+</script>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
