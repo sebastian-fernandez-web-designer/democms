@@ -16,7 +16,7 @@
               el.href = data[key];
             } else if (key.includes('_background_color')) { // Nuevo manejo para colores de fondo
               el.style.backgroundColor = data[key];
-            } else if (key.includes('_text_color')) { // <-- NUEVO CÓDIGO AQUÍ
+            } else if (key.includes('_color')) { // <-- NUEVO CÓDIGO AQUÍ
               el.style.color = data[key];
             } else if (el.tagName === "SPAN") {
               el.innerHTML = data[key].trim();
