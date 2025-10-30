@@ -18,7 +18,9 @@ collections:
         name: "header"
         file: "content/header.md"
         fields:
+          - { label: "Tipo de fondo", name: "header_background_mode", widget: "select", options: ["image","color","none"], default: "image" }
           - { label: "Imagen de fondo", name: "header_background", widget: "image" }
+          - { label: "Color de fondo", name: "header_background_color", widget: "color", default: "#1d809f" }
           - { label: "Título principal (ES)", name: "header_title_es", widget: "string" }
           - { label: "Título principal (EN)", name: "header_title_en", widget: "string" }
           - { label: "Subtítulo (ES)", name: "header_subtitle_es", widget: "string" }
