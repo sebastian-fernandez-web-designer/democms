@@ -117,7 +117,9 @@ loadSection("portfolio", {
 loadSection("services", {
   // Color de fondo
   services_background_color: "services-section",
-
+// Clave para el color del texto del subtítulo/iconos
+  services_subtitle_color: "services-subtitle",
+  services_subtitle_color_en: "services-subtitle-en",
   // Encabezados
   services_subtitle_es: "services-subtitle",
   services_subtitle_en: "services-subtitle-en",
