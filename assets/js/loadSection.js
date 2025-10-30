@@ -136,21 +136,21 @@ loadSection("services", {
   service_desc_1_en: "service-desc-1-en",
 
   // Servicio 2
-  service_icon_1_class: "service-icon-2", // 🚨 NUEVOS MAPEOS
+  service_icon_2_class: "service-icon-2", // 🚨 NUEVOS MAPEOS
   service_title_2_es: "service-title-2",
   service_title_2_en: "service-title-2-en",
   service_desc_2_es: "service-desc-2",
   service_desc_2_en: "service-desc-2-en",
 
   // Servicio 3
-  service_icon_1_class: "service-icon-3", // 🚨 NUEVOS MAPEOS
+  service_icon_3_class: "service-icon-3", // 🚨 NUEVOS MAPEOS
   service_title_3_es: "service-title-3",
   service_title_3_en: "service-title-3-en",
   service_desc_3_es: "service-desc-3",
   service_desc_3_en: "service-desc-3-en",
 
   // Servicio 4
-  service_icon_1_class: "service-icon-4", // 🚨 NUEVOS MAPEOS
+  service_icon_4_class: "service-icon-4", // 🚨 NUEVOS MAPEOS
   service_title_4_es: "service-title-4",
   service_title_4_en: "service-title-4-en",
   service_desc_4_es: "service-desc-4",
