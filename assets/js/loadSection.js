@@ -2,48 +2,115 @@
 (function() {
   function loadSection(sectionName, mapping) {
     fetch(`content/${sectionName}.md`)
-      .then(response => response.text())
+      .then(response => {
+        if (!response.ok) throw new Error(`No se pudo cargar ${sectionName}.md (${response.status})`);
+        return response.text();
+      })
       .then(text => {
         const data = parseFrontMatter(text);
         for (const key in mapping) {
           const elementId = mapping[key];
           const el = document.getElementById(elementId);
-          if (el && typeof data[key] !== 'undefined') {
-// Manejar diferentes tipos de elementos y propiedades
-            if (el.tagName === "IMG") {
-              el.src = data[key];
-            } else if (el.tagName === "A") {
-              el.href = data[key];
-            } else if (key.includes('_background_color')) {
-              el.style.backgroundColor = data[key];
-            } else if (key.includes('_color')) {
-              el.style.color = data[key];
-            } else if (key.includes('_icon_class')) { // Lógica del icono
-              el.className = data[key];
-            } else if (el.tagName === "SPAN") {
-              el.innerHTML = data[key].trim();
-            } else { // Bloque general de contenido (para H1, H2, P, etc.)
-              el.innerHTML = marked.parse(data[key]);
-            }
-          }
+          if (!el || typeof data[key] === 'undefined') continue;
+
+          const rawValue = String(data[key]).trim();
+
+          // PRIORIDAD: claves explícitas para iconos
+          if (key.includes('_icon_class')) {
+            applyIconClass(el, rawValue);
+            continue;
+          }
+
+          // Si el elemento es un <i> y viene una cadena corta, tratar como clase de icono
+          if (el.tagName === 'I' && /^[\w- ]+$/.test(rawValue) && !rawValue.includes('\n')) {
+            applyIconClass(el, rawValue);
+            continue;
+          }
+
+          // Tipos elementales
+          if (el.tagName === 'IMG') {
+            el.src = rawValue;
+            continue;
+          }
+
+          if (el.tagName === 'A') {
+            el.href = rawValue;
+            continue;
+          }
+
+          if (key.includes('_background_color')) {
+            el.style.backgroundColor = rawValue;
+            continue;
+          }
+
+          if (key.includes('_color')) {
+            el.style.color = rawValue;
+            continue;
+          }
+
+          if (el.tagName === 'SPAN') {
+            el.innerHTML = rawValue;
+            continue;
+          }
+
+          // Por defecto: contenido rico. Evitar parsear simples nombres de clase.
+          if (/^[\w- ]+$/.test(rawValue) && !rawValue.includes('\n')) {
+            el.textContent = rawValue;
+          } else {
+            el.innerHTML = (typeof marked !== 'undefined') ? marked.parse(rawValue) : rawValue;
+          }
         }
+      })
+      .catch(err => {
+        console.warn(`Error al cargar la sección "${sectionName}":`, err);
       });
+  }
+
+  // Aplica clase(s) de icono de forma segura, preservando otras clases no-icono
+  function applyIconClass(el, classString) {
+    const newClasses = String(classString || '').trim().split(/\s+/).filter(Boolean);
+    // Si no hay nuevas clases, no hacemos nada
+    if (!newClasses.length) return;
+
+    // Regex para detectar clases de icono según tus convenciones
+    // Ajusta esto si usás prefijos distintos (por ejemplo: 'bi-', 'mdi-')
+    const iconClassPrefixes = ['icon-', 'fa-', 'fas', 'far', 'fab', 'fi-', 'mdi-'];
+    const prefixRe = new RegExp('^(?:' + iconClassPrefixes.map(escapeForRegex).join('|') + ')');
+
+    // Si el elemento es <i>, normalmente reemplazamos su className por las de icono
+    if (el.tagName === 'I') {
+      el.className = newClasses.join(' ');
+      return;
+    }
+
+    // Para elementos que pueden tener clases adicionales (ej. span.service-icon)
+    // conservamos las clases que NO parezcan ser de icono y añadimos las nuevas
+    const kept = Array.from(el.classList).filter(c => !prefixRe.test(c));
+    const final = [...kept, ...newClasses].join(' ').trim();
+    el.className = final;
+  }
+
+  function escapeForRegex(s) {
+    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
   }
 
   function parseFrontMatter(text) {
     const match = text.match(/---\n([\s\S]*?)\n---/);
-    const yaml = match ? match[1] : "";
+    if (!match) return {};
+    const yaml = match[1];
     const lines = yaml.split("\n");
     const data = {};
     lines.forEach(line => {
-      const [key, ...rest] = line.split(":");
-      if (key && rest.length) {
-        let value = rest.join(":").trim();
-        if (value.startsWith("'") && value.endsWith("'")) {
-          value = value.slice(1, -1);
-        }
-        data[key.trim()] = value;
+      const idx = line.indexOf(':');
+      if (idx === -1) return;
+      const key = line.slice(0, idx).trim();
+      let value = line.slice(idx + 1).trim();
+      if (value.startsWith("'") && value.endsWith("'")) {
+        value = value.slice(1, -1);
+      } else if (value.startsWith('"') && value.endsWith('"')) {
+        value = value.slice(1, -1);
       }
+      data[key] = value;
     });
     return data;
   }
