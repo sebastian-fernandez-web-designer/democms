@@ -18,6 +18,8 @@
               el.style.backgroundColor = data[key];
             } else if (key.includes('_color')) { // <-- NUEVO CÓDIGO AQUÍ
               el.style.color = data[key];
+            } else if (key.includes('_icon_class')) { // 🚨 NUEVA LÓGICA PARA ICONos
+              el.className = data[key];
             } else if (el.tagName === "SPAN") {
               el.innerHTML = data[key].trim();
             } else {
@@ -127,24 +129,28 @@ loadSection("services", {
   services_title_en: "services-title-en",
 
   // Servicio 1
+  service_icon_1_class: "service-icon-1", // 🚨 NUEVOS MAPEOS
   service_title_1_es: "service-title-1",
   service_title_1_en: "service-title-1-en",
   service_desc_1_es: "service-desc-1",
   service_desc_1_en: "service-desc-1-en",
 
   // Servicio 2
+  service_icon_1_class: "service-icon-2", // 🚨 NUEVOS MAPEOS
   service_title_2_es: "service-title-2",
   service_title_2_en: "service-title-2-en",
   service_desc_2_es: "service-desc-2",
   service_desc_2_en: "service-desc-2-en",
 
   // Servicio 3
+  service_icon_1_class: "service-icon-3", // 🚨 NUEVOS MAPEOS
   service_title_3_es: "service-title-3",
   service_title_3_en: "service-title-3-en",
   service_desc_3_es: "service-desc-3",
   service_desc_3_en: "service-desc-3-en",
 
   // Servicio 4
+  service_icon_1_class: "service-icon-4", // 🚨 NUEVOS MAPEOS
   service_title_4_es: "service-title-4",
   service_title_4_en: "service-title-4-en",
   service_desc_4_es: "service-desc-4",
