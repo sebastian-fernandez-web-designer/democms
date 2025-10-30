@@ -53,7 +53,8 @@ collections:
           - { label: "Subtítulo (EN)", name: "services_subtitle_en", widget: "string" }
           - { label: "Título principal (ES)", name: "services_title_es", widget: "string" }
           - { label: "Título principal (EN)", name: "services_title_en", widget: "string" }
-          - { label: "Clase de Icono 1", name: "service_icon_1_class", widget: "string", hint: "Ej: icon-screen-smartphone" } #  NUEVO
+          - { label: "Clase de Icono 1", name: "service_icon_1_class", widget: "string", hint: "Ej: icon-screen-smartphone" } #  Clase del icono
+          - { label: "Color de Icono 1", name: "service_icon_1_color", widget: "color" } #  Color del icono
           - { label: "Título servicio 1 (ES)", name: "service_title_1_es", widget: "string" }
           - { label: "Título servicio 1 (EN)", name: "service_title_1_en", widget: "string" }
           - { label: "Descripción servicio 1 (ES)", name: "service_desc_1_es", widget: "string" }
