@@ -9,23 +9,23 @@
           const elementId = mapping[key];
           const el = document.getElementById(elementId);
           if (el && typeof data[key] !== 'undefined') {
-            // Manejar diferentes tipos de elementos y propiedades
-            if (el.tagName === "IMG") {
-              el.src = data[key];
-            } else if (el.tagName === "A") {
-              el.href = data[key];
-            } else if (key.includes('_background_color')) { // Nuevo manejo para colores de fondo
-              el.style.backgroundColor = data[key];
-            } else if (key.includes('_color')) { // <-- NUEVO CÓDIGO AQUÍ
-              el.style.color = data[key];
-            } else if (key.includes('_icon_class')) { // 🚨 NUEVA LÓGICA PARA ICONos
+// Manejar diferentes tipos de elementos y propiedades
+            if (el.tagName === "IMG") {
+              el.src = data[key];
+            } else if (el.tagName === "A") {
+              el.href = data[key];
+            } else if (key.includes('_background_color')) {
+              el.style.backgroundColor = data[key];
+            } else if (key.includes('_color')) {
+              el.style.color = data[key];
+            } else if (key.includes('_icon_class')) { // Lógica del icono
               el.className = data[key];
-            } else if (el.tagName === "SPAN") {
-              el.innerHTML = data[key].trim();
-            } else {
-              el.innerHTML = marked.parse(data[key]);
-            }
-          }
+            } else if (el.tagName === "SPAN") {
+              el.innerHTML = data[key].trim();
+            } else { // Bloque general de contenido (para H1, H2, P, etc.)
+              el.innerHTML = marked.parse(data[key]);
+            }
+          }
         }
       });
   }
