@@ -11,7 +11,7 @@ service_title_1_es: Responsivo.
 service_title_1_en: Responsive..
 service_desc_1_es: Se ve genial en cualquier tamaño de pantalla.
 service_desc_1_en: Looks great on any screen size!..
-service_icon_2_class: icon-pencil
+service_icon_2_class: icon-key
 service_title_2_es: Rediseñado.
 service_title_2_en: Redesigned..
 service_desc_2_es: Actualizado para Bootstrap 5.
