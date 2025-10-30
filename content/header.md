@@ -1,6 +1,6 @@
 ---
-header_background_mode: color
-header_background: /img/uploads/bg-masthead.jpg
+header_background_mode: image
+header_background: /img/uploads/qwd83nc4xxf41.jpg
 header_background_color: '#ffffff'
 header_title_es: Bienvenido a Mi Portafolio.
 header_title_en: Welcome to My Portfolio.
