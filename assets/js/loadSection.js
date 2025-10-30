@@ -196,6 +196,7 @@ loadSection("services", {
   services_title_en: "services-title-en",
 
   // Servicio 1
+  service_icon_1_color: "service-icon-1", // mismo ID
   service_icon_1_class: "service-icon-1", // 🚨 NUEVOS MAPEOS
   service_title_1_es: "service-title-1",
   service_title_1_en: "service-title-1-en",
