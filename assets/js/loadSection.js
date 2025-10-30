@@ -15,6 +15,50 @@
 
           const rawValue = String(data[key]).trim();
 
+          // Manejo específico: header background mode (image | color | none)
+          if (key === 'header_background_mode') {
+            const header = document.getElementById('header-section');
+            const img = document.getElementById('header-background');
+            const mode = rawValue.toLowerCase();
+
+            function applyColor(color) {
+              if (!header) return;
+              header.style.backgroundImage = 'none';
+              header.style.backgroundColor = color || '';
+              if (img) img.style.display = 'none';
+            }
+
+            if (mode === 'image') {
+              const src = data['header_background'];
+              if (src) {
+                const pre = new Image();
+                pre.src = src;
+                pre.onload = () => {
+                  if (header) {
+                    header.style.backgroundImage = `url("${src}")`;
+                    header.style.backgroundSize = data['header_background_size'] || 'cover';
+                    header.style.backgroundPosition = data['header_background_position'] || 'center';
+                  }
+                  if (img) img.style.display = 'none';
+                };
+                pre.onerror = () => {
+                  if (img) img.style.display = '';
+                };
+              } else {
+                if (img) img.style.display = '';
+              }
+            } else if (mode === 'color') {
+              applyColor(data['header_background_color']);
+            } else {
+              if (header) {
+                header.style.backgroundImage = '';
+                header.style.backgroundColor = '';
+              }
+              if (img) img.style.display = '';
+            }
+            continue;
+          }
+
           // PRIORIDAD: claves explícitas para iconos
           if (key.includes('_icon_class')) {
             applyIconClass(el, rawValue);
@@ -69,22 +113,16 @@
   // Aplica clase(s) de icono de forma segura, preservando otras clases no-icono
   function applyIconClass(el, classString) {
     const newClasses = String(classString || '').trim().split(/\s+/).filter(Boolean);
-    // Si no hay nuevas clases, no hacemos nada
     if (!newClasses.length) return;
 
-    // Regex para detectar clases de icono según tus convenciones
-    // Ajusta esto si usás prefijos distintos (por ejemplo: 'bi-', 'mdi-')
     const iconClassPrefixes = ['icon-', 'fa-', 'fas', 'far', 'fab', 'fi-', 'mdi-'];
     const prefixRe = new RegExp('^(?:' + iconClassPrefixes.map(escapeForRegex).join('|') + ')');
 
-    // Si el elemento es <i>, normalmente reemplazamos su className por las de icono
     if (el.tagName === 'I') {
       el.className = newClasses.join(' ');
       return;
     }
 
-    // Para elementos que pueden tener clases adicionales (ej. span.service-icon)
-    // conservamos las clases que NO parezcan ser de icono y añadimos las nuevas
     const kept = Array.from(el.classList).filter(c => !prefixRe.test(c));
     const final = [...kept, ...newClasses].join(' ').trim();
     el.className = final;
@@ -121,6 +159,8 @@
 
 loadSection("header", {
   header_background: "header-background",
+  header_background_color: "header-section",
+  header_background_mode: "header-section",
   header_title_es: "header-title",
   header_title_en: "header-title-en",
   header_subtitle_es: "header-subtitle",
@@ -129,7 +169,6 @@ loadSection("header", {
   header_button_text_es: "header-button-text",
   header_button_text_en: "header-button-text-en"
 });
-
 
 loadSection("about", {
   // Color de fondo
