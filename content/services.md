@@ -6,6 +6,7 @@ services_subtitle_es: Servicios.
 services_subtitle_en: Services..
 services_title_es: Lo Que Ofrecemos.
 services_title_en: What We Offer..
+service_icon_1_color: "#e63946"
 service_icon_1_class: icon-settings
 service_title_1_es: Responsivo.
 service_title_1_en: Responsive..
