@@ -1,7 +1,7 @@
 ---
-header_background_mode: image
+header_background_mode: color
 header_background: /img/uploads/bg-masthead.jpg
-header_background_color: '#ffffff'
+header_background_color: '#11ff00'
 header_title_es: Bienvenido a Mi Portafolio.
 header_title_en: Welcome to My Portfolio.
 header_subtitle_es: Un tema gratuito de Bootstrap.
