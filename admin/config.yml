@@ -65,23 +65,34 @@ collections:
           - { label: "Subtítulo (EN)", name: "services_subtitle_en", widget: "string" }
           - { label: "Título principal (ES)", name: "services_title_es", widget: "string" }
           - { label: "Título principal (EN)", name: "services_title_en", widget: "string" }
-          - { label: "Clase de Icono 1", name: "service_icon_1_class", widget: "string", hint: "Ej: icon-screen-smartphone" } #  Clase del icono
-          - { label: "Color de Icono 1", name: "service_icon_1_color", widget: "color" } #  Color del icono
+          - { label: "Clase Icono 1", name: "service_icon_1_class", widget: "string", required: false }
+          - { label: "Color Icono 1", name: "service_icon_1_color", widget: "color", required: false }
+          - { label: "Tamaño Icono 1 (px)", name: "service_icon_1_size", widget: "number", default: 36 }
+          - { label: "Color fondo círculo 1", name: "service_icon_1_bg", widget: "color", required: false }
           - { label: "Título servicio 1 (ES)", name: "service_title_1_es", widget: "string" }
           - { label: "Título servicio 1 (EN)", name: "service_title_1_en", widget: "string" }
           - { label: "Descripción servicio 1 (ES)", name: "service_desc_1_es", widget: "string" }
           - { label: "Descripción servicio 1 (EN)", name: "service_desc_1_en", widget: "string" }
-          - { label: "Clase de Icono 2", name: "service_icon_2_class", widget: "string", hint: "Ej: icon-pencil" } #  NUEVO
+          - { label: "Clase Icono 2", name: "service_icon_2_class", widget: "string", required: false }
+          - { label: "Color Icono 2", name: "service_icon_2_color", widget: "color", required: false }
+          - { label: "Tamaño Icono 2 (px)", name: "service_icon_2_size", widget: "number", default: 36 }
+          - { label: "Color fondo círculo 2", name: "service_icon_2_bg", widget: "color", required: false }
           - { label: "Título servicio 2 (ES)", name: "service_title_2_es", widget: "string" }
           - { label: "Título servicio 2 (EN)", name: "service_title_2_en", widget: "string" }
           - { label: "Descripción servicio 2 (ES)", name: "service_desc_2_es", widget: "string" }
           - { label: "Descripción servicio 2 (EN)", name: "service_desc_2_en", widget: "string" }
-          - { label: "Clase de Icono 3", name: "service_icon_3_class", widget: "string", hint: "Ej: icon-like" } #  NUEVO
+          - { label: "Clase Icono 3", name: "service_icon_3_class", widget: "string", required: false }
+          - { label: "Color Icono 3", name: "service_icon_3_color", widget: "color", required: false }
+          - { label: "Tamaño Icono 3 (px)", name: "service_icon_3_size", widget: "number", default: 36 }
+          - { label: "Color fondo círculo 3", name: "service_icon_3_bg", widget: "color", required: false }
           - { label: "Título servicio 3 (ES)", name: "service_title_3_es", widget: "string" }
           - { label: "Título servicio 3 (EN)", name: "service_title_3_en", widget: "string" }
           - { label: "Descripción servicio 3 (ES)", name: "service_desc_3_es", widget: "string" }
           - { label: "Descripción servicio 3 (EN)", name: "service_desc_3_en", widget: "string" }
-          - { label: "Clase de Icono 4", name: "service_icon_4_class", widget: "string", hint: "Ej: icon-mustache" } #  NUEVO
+          - { label: "Clase Icono 4", name: "service_icon_4_class", widget: "string", required: false }
+          - { label: "Color Icono 4", name: "service_icon_4_color", widget: "color", required: false }
+          - { label: "Tamaño Icono 4 (px)", name: "service_icon_4_size", widget: "number", default: 36 }
+          - { label: "Color fondo círculo 4", name: "service_icon_4_bg", widget: "color", required: false }
           - { label: "Título servicio 4 (ES)", name: "service_title_4_es", widget: "string" }
           - { label: "Título servicio 4 (EN)", name: "service_title_4_en", widget: "string" }
           - { label: "Descripción servicio 4 (ES)", name: "service_desc_4_es", widget: "string" }
