@@ -80,8 +80,16 @@
           // PRIORIDAD: regla específica para el botón del header (evita que se trate como href)
           if (key === 'header_button_bg_color') {
             // el debe ser el <a> mapeado a header-button-link
-            el.style.backgroundColor = rawValue;
-            el.style.borderColor = rawValue;
+            // Limpiar nodos de texto vacíos entre spans para evitar espacios sobrantes
+            cleanWhitespaceTextNodes(el);
+
+            if (rawValue) {
+              el.style.backgroundColor = rawValue;
+              el.style.borderColor = rawValue;
+            } else {
+              el.style.backgroundColor = '';
+              el.style.borderColor = '';
+            }
 
             const textColor = data['header_button_text_color'];
             if (textColor) {
@@ -95,21 +103,24 @@
 
           // Manejo genérico de enlaces (solo si no fue procesado por regla específica)
           if (el.tagName === 'A') {
-            el.href = rawValue;
+            // solo asignar href si el rawValue parece una URL o ancla
+            if (/^#|https?:\/\//.test(rawValue)) {
+              el.href = rawValue;
+            }
             continue;
           }
 
-// PRIORIDAD: regla específica para color del título o subtítulo (aplica también a la versión -en si existe)
-// Si falta el color específico, usar header_text_color como fallback
-if (key === 'header_title_color' || key === 'header_subtitle_color') {
-  const color = rawValue || data['header_text_color'] || '';
-  if (color) {
-    el.style.color = color;
-    const enEl = document.getElementById(elementId + '-en');
-    if (enEl) enEl.style.color = color;
-  }
-  continue;
-}
+          // PRIORIDAD: regla específica para color del título o subtítulo (aplica también a la versión -en si existe)
+          // Si falta el color específico, no aplicar nada (comportamiento sin fallback global)
+          if (key === 'header_title_color' || key === 'header_subtitle_color') {
+            const color = rawValue || '';
+            if (color) {
+              el.style.color = color;
+              const enEl = document.getElementById(elementId + '-en');
+              if (enEl) enEl.style.color = color;
+            }
+            continue;
+          }
 
           if (key.includes('_background_color')) {
             el.style.backgroundColor = rawValue;
@@ -118,26 +129,61 @@ if (key === 'header_title_color' || key === 'header_subtitle_color') {
 
           // REGLA GENERAL para Color de Texto (se ejecuta solo si no hay una regla más específica)
           if (key.includes('_color')) {
-            el.style.color = rawValue;
+            // Evitar aplicar color si el valor está vacío
+            if (rawValue) el.style.color = rawValue;
             continue;
           }
 
+          // SPANs: usar siempre textContent para evitar HTML/entidades añadidas
           if (el.tagName === 'SPAN') {
-            el.innerHTML = rawValue;
+            // limpiar nodos de texto innecesarios dentro del span antes de setear
+            // (aunque un span normalmente no tendrá text nodes hijos aparte del suyo)
+            removeAllChildTextNodes(el);
+            el.textContent = rawValue;
             continue;
           }
 
           // Por defecto: contenido rico. Evitar parsear simples nombres de clase.
           if (/^[\w- ]+$/.test(rawValue) && !rawValue.includes('\n')) {
+            // texto plano seguro
             el.textContent = rawValue;
           } else {
-            el.innerHTML = (typeof marked !== 'undefined') ? marked.parse(rawValue) : rawValue;
+            // contenido con posible Markdown/HTML: SOLO para elementos que realmente aceptan HTML
+            // evitar aplicarlo a elementos como <a>, <button>, etc.
+            if (typeof marked !== 'undefined' && !/^(BUTTON|A|SPAN|H1|H2|H3|H4|H5|H6)$/.test(el.tagName)) {
+              el.innerHTML = marked.parse(rawValue);
+            } else {
+              // si no se puede parsear, poner texto plano para no introducir HTML no deseado
+              el.textContent = rawValue;
+            }
           }
         }
       })
       .catch(err => {
         console.warn(`Error al cargar la sección "${sectionName}":`, err);
       });
+  }
+
+  // Elimina nodos de texto que solo contienen espacios/retornos dentro de un elemento
+  function cleanWhitespaceTextNodes(container) {
+    if (!container || !container.childNodes) return;
+    const toRemove = [];
+    container.childNodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE && /^[\s\u00A0]*$/.test(node.nodeValue)) {
+        toRemove.push(node);
+      }
+    });
+    toRemove.forEach(n => n.parentNode.removeChild(n));
+  }
+
+  // Remueve nodos de texto hijos dejando intactos elementos y su texto
+  function removeAllChildTextNodes(el) {
+    if (!el || !el.childNodes) return;
+    const toRemove = [];
+    el.childNodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) toRemove.push(node);
+    });
+    toRemove.forEach(n => n.parentNode.removeChild(n));
   }
 
   // Aplica clase(s) de icono de forma segura, preservando otras clases no-icono
