@@ -113,9 +113,12 @@
                 const m = key.match(/^service_icon_(\d+)_bg$/);
                 const idx = m ? m[1] : null;
                 const sizeKey = idx ? `service_icon_${idx}_size` : null;
-                const sizeVal = sizeKey && typeof data[sizeKey] !== 'undefined' ? Number(data[sizeKey]) : NaN;
-                const baseSize = (sizeVal && sizeVal > 0) ? sizeVal : 55;
-                const diameter = Math.round(baseSize * 1.8);
+                // Obtenemos el tamaño del ícono (36px por defecto)
+                const iconSize = sizeKey && typeof data[sizeKey] !== 'undefined' ? Number(data[sizeKey]) : 36;
+                
+                // Nuevo factor de 3.11 para que un icono de 36px resulte en un círculo de 112px
+                const diameterFactor = 3.11; 
+                const diameter = Math.round(iconSize * diameterFactor); // 36 * 3.11 = ~112
 
                 wrapper.style.width = diameter + 'px';
                 wrapper.style.height = diameter + 'px';
@@ -325,8 +328,8 @@
   // 1) loadSection para todos los bloques de contenido (adaptado bilingüe)
   //
   const currentLang = document.body.classList.contains("lang-en") ? "en" : "es";
-
   // --- HEADER: Con nuevos colores ---
+  
   loadSection("header", {
     header_background: "header-background",
     header_background_color: "header-section",
