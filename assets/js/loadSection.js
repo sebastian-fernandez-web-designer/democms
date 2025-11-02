@@ -71,9 +71,65 @@
             continue;
           }
 
-          // Tipos elementales
+            // Tipos elementales
           if (el.tagName === 'IMG') {
             el.src = rawValue;
+            continue;
+          }
+
+          // --- Manejo específico: iconos de servicios (clase, color, tamaño, fondo) ---
+          // Debe ir antes de las reglas generales de color/enlaces para tener prioridad
+          if (/^service_icon_\d+_class$/.test(key)) {
+            applyIconClass(el, rawValue);
+            continue;
+          }
+
+          if (/^service_icon_\d+_color$/.test(key)) {
+            if (rawValue) el.style.color = rawValue;
+            else el.style.color = '';
+            continue;
+          }
+
+          if (/^service_icon_\d+_size$/.test(key)) {
+            const px = Number(rawValue) || 0;
+            if (px > 0) {
+              el.style.fontSize = px + 'px';
+              el.style.lineHeight = '1';
+            } else {
+              el.style.fontSize = '';
+              el.style.lineHeight = '';
+            }
+            continue;
+          }
+
+          if (/^service_icon_\d+_bg$/.test(key)) {
+            const wrapper = el.closest('.service-icon') || (el.parentElement && el.parentElement.classList.contains('service-icon') ? el.parentElement : null);
+            if (wrapper) {
+              if (rawValue) {
+                wrapper.style.backgroundColor = rawValue;
+
+                const m = key.match(/^service_icon_(\d+)_bg$/);
+                const idx = m ? m[1] : null;
+                const sizeKey = idx ? `service_icon_${idx}_size` : null;
+                const sizeVal = sizeKey && typeof data[sizeKey] !== 'undefined' ? Number(data[sizeKey]) : NaN;
+                const baseSize = (sizeVal && sizeVal > 0) ? sizeVal : 36;
+                const pad = Math.round(baseSize * 1.8);
+                wrapper.style.width = pad + 'px';
+                wrapper.style.height = pad + 'px';
+                wrapper.style.display = 'inline-flex';
+                wrapper.style.alignItems = 'center';
+                wrapper.style.justifyContent = 'center';
+                wrapper.style.borderRadius = '50%';
+              } else {
+                wrapper.style.backgroundColor = '';
+                wrapper.style.width = '';
+                wrapper.style.height = '';
+                wrapper.style.display = '';
+                wrapper.style.alignItems = '';
+                wrapper.style.justifyContent = '';
+                wrapper.style.borderRadius = '';
+              }
+            }
             continue;
           }
 
@@ -98,32 +154,6 @@
                 span.style.color = textColor;
               });
             }
-            continue;
-          }
-
-          // Manejo genérico de enlaces (solo si no fue procesado por regla específica)
-          if (el.tagName === 'A') {
-            // solo asignar href si el rawValue parece una URL o ancla
-            if (/^#|https?:\/\//.test(rawValue)) {
-              el.href = rawValue;
-            }
-            continue;
-          }
-
-          // PRIORIDAD: regla específica para color del título o subtítulo (aplica también a la versión -en si existe)
-          // Si falta el color específico, no aplicar nada (comportamiento sin fallback global)
-          if (key === 'header_title_color' || key === 'header_subtitle_color') {
-            const color = rawValue || '';
-            if (color) {
-              el.style.color = color;
-              const enEl = document.getElementById(elementId + '-en');
-              if (enEl) enEl.style.color = color;
-            }
-            continue;
-          }
-
-          if (key.includes('_background_color')) {
-            el.style.backgroundColor = rawValue;
             continue;
           }
 
@@ -306,48 +336,58 @@
   });
 
 
-  loadSection("services", {
-    // Color de fondo
-    services_background_color: "services-section",
-    // Clave para el color del texto del subtítulo/iconos
-    services_subtitle_color: "services-subtitle",
-    services_subtitle_color_en: "services-subtitle-en",
-    // Encabezados
-    services_subtitle_es: "services-subtitle",
-    services_subtitle_en: "services-subtitle-en",
-    services_title_es: "services-title",
-    services_title_en: "services-title-en",
+loadSection("services", {
+  // Color de fondo
+  services_background_color: "services-section",
+  // Clave para el color del texto del subtítulo/iconos
+  services_subtitle_color: "services-subtitle",
+  services_subtitle_color_en: "services-subtitle-en",
+  // Encabezados
+  services_subtitle_es: "services-subtitle",
+  services_subtitle_en: "services-subtitle-en",
+  services_title_es: "services-title",
+  services_title_en: "services-title-en",
 
-    // Servicio 1
-    service_icon_1_color: "service-icon-1", // mismo ID
-    service_icon_1_class: "service-icon-1", // 🚨 NUEVOS MAPEOS
-    service_title_1_es: "service-title-1",
-    service_title_1_en: "service-title-1-en",
-    service_desc_1_es: "service-desc-1",
-    service_desc_1_en: "service-desc-1-en",
+  // Servicio 1
+  service_icon_1_class: "service-icon-1",
+  service_icon_1_color: "service-icon-1",
+  service_icon_1_size: "service-icon-1",
+  service_icon_1_bg: "service-icon-1",
+  service_title_1_es: "service-title-1",
+  service_title_1_en: "service-title-1-en",
+  service_desc_1_es: "service-desc-1",
+  service_desc_1_en: "service-desc-1-en",
 
-    // Servicio 2
-    service_icon_2_class: "service-icon-2", // 🚨 NUEVOS MAPEOS
-    service_title_2_es: "service-title-2",
-    service_title_2_en: "service-title-2-en",
-    service_desc_2_es: "service-desc-2",
-    service_desc_2_en: "service-desc-2-en",
+  // Servicio 2
+  service_icon_2_class: "service-icon-2",
+  service_icon_2_color: "service-icon-2",
+  service_icon_2_size: "service-icon-2",
+  service_icon_2_bg: "service-icon-2",
+  service_title_2_es: "service-title-2",
+  service_title_2_en: "service-title-2-en",
+  service_desc_2_es: "service-desc-2",
+  service_desc_2_en: "service-desc-2-en",
 
-    // Servicio 3
-    service_icon_3_class: "service-icon-3", // 🚨 NUEVOS MAPEOS
-    service_title_3_es: "service-title-3",
-    service_title_3_en: "service-title-3-en",
-    service_desc_3_es: "service-desc-3",
-    service_desc_3_en: "service-desc-3-en",
+  // Servicio 3
+  service_icon_3_class: "service-icon-3",
+  service_icon_3_color: "service-icon-3",
+  service_icon_3_size: "service-icon-3",
+  service_icon_3_bg: "service-icon-3",
+  service_title_3_es: "service-title-3",
+  service_title_3_en: "service-title-3-en",
+  service_desc_3_es: "service-desc-3",
+  service_desc_3_en: "service-desc-3-en",
 
-    // Servicio 4
-    service_icon_4_class: "service-icon-4", // 🚨 NUEVOS MAPEOS
-    service_title_4_es: "service-title-4",
-    service_title_4_en: "service-title-4-en",
-    service_desc_4_es: "service-desc-4",
-    service_desc_4_en: "service-desc-4-en"
-  });
-
+  // Servicio 4
+  service_icon_4_class: "service-icon-4",
+  service_icon_4_color: "service-icon-4",
+  service_icon_4_size: "service-icon-4",
+  service_icon_4_bg: "service-icon-4",
+  service_title_4_es: "service-title-4",
+  service_title_4_en: "service-title-4-en",
+  service_desc_4_es: "service-desc-4",
+  service_desc_4_en: "service-desc-4-en"
+});
 
   loadSection("callout", {
     // Imagen de fondo
