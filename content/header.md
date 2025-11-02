@@ -1,5 +1,5 @@
 ---
-header_background_mode: color
+header_background_mode: image
 header_background: /img/uploads/bg-masthead.jpg
 header_background_color: '#11ff00'
 header_title_es: Bienvenido a Mi Portafolio.
