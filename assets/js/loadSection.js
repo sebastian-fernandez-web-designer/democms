@@ -9,13 +9,6 @@
       .then(text => {
         const data = parseFrontMatter(text);
 
-        // Preparación: limpiar nodos de espacio sobrantes en el header antes de pintar
-        const headerRoot = document.getElementById('header-section');
-        if (headerRoot) {
-          removeWhitespaceOnlyTextNodes(headerRoot);
-          trimTextNodes(headerRoot);
-        }
-
         for (const key in mapping) {
           const elementId = mapping[key];
           const el = document.getElementById(elementId);
@@ -67,14 +60,15 @@
             continue;
           }
 
-          // PRIORIDAD: claves explícitas para iconos
-          if (key.includes('_icon_class')) {
-            applyIconClass(el, rawValue);
+          // PRIORIDAD: claves explícitas para iconos (usa applyIconClass si viene _class)
+          if (/^service_icon_\d+_class$/.test(key) || key.includes('_icon_class')) {
+            if (el.tagName === 'I') applyIconClass(el, rawValue);
             continue;
           }
 
-          // Si el elemento es un <i> y viene una cadena corta, tratar como clase de icono
-          if (el.tagName === 'I' && /^[\w- ]+$/.test(rawValue) && !rawValue.includes('\n')) {
+          // Regla restringida para interpretar valores como clase en <i>
+          // Evita que números puros (ej. "36") se consideren clases
+          if (el.tagName === 'I' && /[A-Za-z_-]/.test(rawValue) && !rawValue.includes('\n')) {
             applyIconClass(el, rawValue);
             continue;
           }
@@ -82,6 +76,61 @@
           // Tipos elementales
           if (el.tagName === 'IMG') {
             el.src = rawValue;
+            continue;
+          }
+
+          // --- Manejo específico: iconos de servicios (color, tamaño, fondo) ---
+          if (/^service_icon_\d+_color$/.test(key)) {
+            if (el.tagName === 'I') {
+              if (rawValue) el.style.color = rawValue;
+              else el.style.color = '';
+            }
+            continue;
+          }
+
+          if (/^service_icon_\d+_size$/.test(key)) {
+            if (el.tagName === 'I') {
+              const px = Number(rawValue) || 0;
+              if (px > 0) {
+                el.style.fontSize = px + 'px';
+                el.style.lineHeight = px + 'px';
+              } else {
+                el.style.fontSize = '';
+                el.style.lineHeight = '';
+              }
+            }
+            continue;
+          }
+
+          if (/^service_icon_\d+_bg$/.test(key)) {
+            const wrapper = el.closest('.service-icon') || (el.parentElement && el.parentElement.classList.contains('service-icon') ? el.parentElement : null);
+            if (wrapper) {
+              if (rawValue) {
+                wrapper.style.backgroundColor = rawValue;
+
+                const m = key.match(/^service_icon_(\d+)_bg$/);
+                const idx = m ? m[1] : null;
+                const sizeKey = idx ? `service_icon_${idx}_size` : null;
+                const sizeVal = sizeKey && typeof data[sizeKey] !== 'undefined' ? Number(data[sizeKey]) : NaN;
+                const baseSize = (sizeVal && sizeVal > 0) ? sizeVal : 36;
+                const diameter = Math.round(baseSize * 1.8);
+
+                wrapper.style.width = diameter + 'px';
+                wrapper.style.height = diameter + 'px';
+                wrapper.style.display = 'inline-flex';
+                wrapper.style.alignItems = 'center';
+                wrapper.style.justifyContent = 'center';
+                wrapper.style.borderRadius = '50%';
+              } else {
+                wrapper.style.backgroundColor = '';
+                wrapper.style.width = '';
+                wrapper.style.height = '';
+                wrapper.style.display = '';
+                wrapper.style.alignItems = '';
+                wrapper.style.justifyContent = '';
+                wrapper.style.borderRadius = '';
+              }
+            }
             continue;
           }
 
@@ -112,14 +161,20 @@
           // Manejo genérico de enlaces (solo si no fue procesado por regla específica)
           if (el.tagName === 'A') {
             // solo asignar href si el rawValue parece una URL o ancla
-            if (/^#|https?:\/\//.test(rawValue)) {
+            if (/^(#|https?:\/\/)/.test(rawValue)) {
               el.href = rawValue;
             }
             continue;
           }
 
+          // Evitar innerHTML en descripciones de servicio (previene <p> anidados)
+          if (elementId && /^service-desc-\d+(?:-en)?$/.test(elementId)) {
+            el.textContent = rawValue;
+            continue;
+          }
+
           // PRIORIDAD: regla específica para color del título o subtítulo (aplica también a la versión -en si existe)
-          if (key === 'header_title_color' || key === 'header_subtitle_color') {
+          if (key === 'header_title_color' || key === 'header_subtitle_color' || /^services_subtitle_color(_en)?$/.test(key)) {
             const color = rawValue || '';
             if (color) {
               el.style.color = color;
@@ -155,7 +210,6 @@
           if (/^[\w- ]+$/.test(rawValue) && !rawValue.includes('\n')) {
             el.textContent = rawValue;
           } else {
-            // contenido con posible Markdown/HTML: SOLO para elementos que realmente aceptan HTML
             if (typeof marked !== 'undefined' && !/^(BUTTON|A|SPAN|H1|H2|H3|H4|H5|H6)$/.test(el.tagName)) {
               el.innerHTML = marked.parse(rawValue);
             } else {
@@ -163,26 +217,35 @@
             }
           }
         }
-
-        // Limpieza final: normalizar y limpiar posibles text nodes sobrantes
-        const headerContainer = document.getElementById('header-content-container');
-        if (headerContainer) {
-          trimTextNodes(headerContainer);
-          removeWhitespaceOnlyTextNodes(headerContainer);
-          headerContainer.normalize();
-        }
-        if (headerRoot) {
-          trimTextNodes(headerRoot);
-          removeWhitespaceOnlyTextNodes(headerRoot);
-          headerRoot.normalize();
-        }
       })
       .catch(err => {
         console.warn(`Error al cargar la sección "${sectionName}":`, err);
       });
   }
 
-  // Elimina nodos de texto que solo contienen espacios/NBSP dentro de un elemento
+  // Elimina nodos de texto que solo contienen espacios/retornos dentro de un elemento
+  function cleanWhitespaceTextNodes(container) {
+    if (!container || !container.childNodes) return;
+    const toRemove = [];
+    container.childNodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE && /^[\s\u00A0]*$/.test(node.nodeValue)) {
+        toRemove.push(node);
+      }
+    });
+    toRemove.forEach(n => n.parentNode.removeChild(n));
+  }
+
+  // Remueve nodos de texto hijos dejando intactos elementos y su texto
+  function removeAllChildTextNodes(el) {
+    if (!el || !el.childNodes) return;
+    const toRemove = [];
+    el.childNodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) toRemove.push(node);
+    });
+    toRemove.forEach(n => n.parentNode.removeChild(n));
+  }
+
+  // Elimina solo text nodes que contienen únicamente espacios o NBSP (utilidad adicional)
   function removeWhitespaceOnlyTextNodes(root) {
     if (!root) return;
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
@@ -192,10 +255,10 @@
       if (/^[\s\u00A0]*$/.test(node.nodeValue)) toRemove.push(node);
     }
     toRemove.forEach(n => n.parentNode && n.parentNode.removeChild(n));
-    root.normalize();
+    if (root.normalize) root.normalize();
   }
 
-  // Recorta y colapsa espacios en text nodes significativos
+  // Recorta y colapsa espacios en text nodes que tienen texto (utilidad adicional)
   function trimTextNodes(root) {
     if (!root) return;
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
@@ -208,29 +271,7 @@
       }
     }
     updates.forEach(u => u.node.nodeValue = u.value);
-    root.normalize();
-  }
-
-  // Elimina nodos de texto hijos dejando intactos elementos y su texto
-  function removeAllChildTextNodes(el) {
-    if (!el || !el.childNodes) return;
-    const toRemove = [];
-    el.childNodes.forEach(node => {
-      if (node.nodeType === Node.TEXT_NODE) toRemove.push(node);
-    });
-    toRemove.forEach(n => n.parentNode.removeChild(n));
-  }
-
-  // Limpia nodos de texto que sólo contienen espacios dentro de un contenedor (similar)
-  function cleanWhitespaceTextNodes(container) {
-    if (!container || !container.childNodes) return;
-    const toRemove = [];
-    container.childNodes.forEach(node => {
-      if (node.nodeType === Node.TEXT_NODE && /^[\s\u00A0]*$/.test(node.nodeValue)) {
-        toRemove.push(node);
-      }
-    });
-    toRemove.forEach(n => n.parentNode.removeChild(n));
+    if (root.normalize) root.normalize();
   }
 
   // Aplica clase(s) de icono de forma segura, preservando otras clases no-icono
@@ -242,7 +283,10 @@
     const prefixRe = new RegExp('^(?:' + iconClassPrefixes.map(escapeForRegex).join('|') + ')');
 
     if (el.tagName === 'I') {
-      el.className = newClasses.join(' ');
+      // si vienen valores raros (como números) no los asignamos como clase
+      const filtered = newClasses.filter(c => /[A-Za-z_-]/.test(c));
+      if (!filtered.length) return;
+      el.className = filtered.join(' ');
       return;
     }
 
