@@ -99,13 +99,17 @@
             continue;
           }
 
-          // PRIORIDAD: regla específica para color del título o subtítulo (aplica también a la versión -en si existe)
-          if (key === 'header_title_color' || key === 'header_subtitle_color') {
-            el.style.color = rawValue;
-            const enEl = document.getElementById(elementId + '-en');
-            if (enEl) enEl.style.color = rawValue;
-            continue;
-          }
+// PRIORIDAD: regla específica para color del título o subtítulo (aplica también a la versión -en si existe)
+// Si falta el color específico, usar header_text_color como fallback
+if (key === 'header_title_color' || key === 'header_subtitle_color') {
+  const color = rawValue || data['header_text_color'] || '';
+  if (color) {
+    el.style.color = color;
+    const enEl = document.getElementById(elementId + '-en');
+    if (enEl) enEl.style.color = color;
+  }
+  continue;
+}
 
           if (key.includes('_background_color')) {
             el.style.backgroundColor = rawValue;
