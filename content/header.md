@@ -2,7 +2,6 @@
 header_background_mode: color
 header_background: /img/uploads/bg-masthead.jpg
 header_background_color: '#000000'
-header_text_color: '#f3b903'
 header_title_color: '#ff00f7'
 header_subtitle_color: '#0033ff'
 header_button_bg_color: '#398f32'
