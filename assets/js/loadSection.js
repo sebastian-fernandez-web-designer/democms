@@ -8,6 +8,7 @@
       })
       .then(text => {
         const data = parseFrontMatter(text);
+
         for (const key in mapping) {
           const elementId = mapping[key];
           const el = document.getElementById(elementId);
@@ -59,45 +60,44 @@
             continue;
           }
 
-          // PRIORIDAD: claves explícitas para iconos
-          if (key.includes('_icon_class')) {
+          // PRIORIDAD: claves explícitas para iconos (usa applyIconClass si viene _class)
+          if (/^service_icon_\d+_class$/.test(key) || key.includes('_icon_class')) {
+            if (el.tagName === 'I') applyIconClass(el, rawValue);
+            continue;
+          }
+
+          // Regla restringida para interpretar valores como clase en <i>
+          // Evita que números puros (ej. "36") se consideren clases
+          if (el.tagName === 'I' && /[A-Za-z_-]/.test(rawValue) && !rawValue.includes('\n')) {
             applyIconClass(el, rawValue);
             continue;
           }
 
-          // Si el elemento es un <i> y viene una cadena corta, tratar como clase de icono
-          if (el.tagName === 'I' && /^[\w- ]+$/.test(rawValue) && !rawValue.includes('\n')) {
-            applyIconClass(el, rawValue);
-            continue;
-          }
-
-            // Tipos elementales
+          // Tipos elementales
           if (el.tagName === 'IMG') {
             el.src = rawValue;
             continue;
           }
 
-          // --- Manejo específico: iconos de servicios (clase, color, tamaño, fondo) ---
-          // Debe ir antes de las reglas generales de color/enlaces para tener prioridad
-          if (/^service_icon_\d+_class$/.test(key)) {
-            applyIconClass(el, rawValue);
-            continue;
-          }
-
+          // --- Manejo específico: iconos de servicios (color, tamaño, fondo) ---
           if (/^service_icon_\d+_color$/.test(key)) {
-            if (rawValue) el.style.color = rawValue;
-            else el.style.color = '';
+            if (el.tagName === 'I') {
+              if (rawValue) el.style.color = rawValue;
+              else el.style.color = '';
+            }
             continue;
           }
 
           if (/^service_icon_\d+_size$/.test(key)) {
-            const px = Number(rawValue) || 0;
-            if (px > 0) {
-              el.style.fontSize = px + 'px';
-              el.style.lineHeight = '1';
-            } else {
-              el.style.fontSize = '';
-              el.style.lineHeight = '';
+            if (el.tagName === 'I') {
+              const px = Number(rawValue) || 0;
+              if (px > 0) {
+                el.style.fontSize = px + 'px';
+                el.style.lineHeight = px + 'px';
+              } else {
+                el.style.fontSize = '';
+                el.style.lineHeight = '';
+              }
             }
             continue;
           }
@@ -113,9 +113,10 @@
                 const sizeKey = idx ? `service_icon_${idx}_size` : null;
                 const sizeVal = sizeKey && typeof data[sizeKey] !== 'undefined' ? Number(data[sizeKey]) : NaN;
                 const baseSize = (sizeVal && sizeVal > 0) ? sizeVal : 36;
-                const pad = Math.round(baseSize * 1.8);
-                wrapper.style.width = pad + 'px';
-                wrapper.style.height = pad + 'px';
+                const diameter = Math.round(baseSize * 1.8);
+
+                wrapper.style.width = diameter + 'px';
+                wrapper.style.height = diameter + 'px';
                 wrapper.style.display = 'inline-flex';
                 wrapper.style.alignItems = 'center';
                 wrapper.style.justifyContent = 'center';
@@ -157,17 +158,49 @@
             continue;
           }
 
+          // Manejo genérico de enlaces (solo si no fue procesado por regla específica)
+          if (el.tagName === 'A') {
+            // solo asignar href si el rawValue parece una URL o ancla
+            if (/^(#|https?:\/\/)/.test(rawValue)) {
+              el.href = rawValue;
+            }
+            continue;
+          }
+
+          // Evitar innerHTML en descripciones de servicio (previene <p> anidados)
+          if (elementId && /^service-desc-\d+(?:-en)?$/.test(elementId)) {
+            el.textContent = rawValue;
+            continue;
+          }
+
+          // PRIORIDAD: regla específica para color del título o subtítulo (aplica también a la versión -en si existe)
+          if (key === 'header_title_color' || key === 'header_subtitle_color' || /^services_subtitle_color(_en)?$/.test(key)) {
+            const color = rawValue || '';
+            if (color) {
+              el.style.color = color;
+              const enEl = document.getElementById(elementId + '-en');
+              if (enEl) enEl.style.color = color;
+            } else {
+              el.style.color = '';
+              const enEl = document.getElementById(elementId + '-en');
+              if (enEl) enEl.style.color = '';
+            }
+            continue;
+          }
+
+          if (key.includes('_background_color')) {
+            el.style.backgroundColor = rawValue;
+            continue;
+          }
+
           // REGLA GENERAL para Color de Texto (se ejecuta solo si no hay una regla más específica)
           if (key.includes('_color')) {
-            // Evitar aplicar color si el valor está vacío
             if (rawValue) el.style.color = rawValue;
             continue;
           }
 
           // SPANs: usar siempre textContent para evitar HTML/entidades añadidas
           if (el.tagName === 'SPAN') {
-            // limpiar nodos de texto innecesarios dentro del span antes de setear
-            // (aunque un span normalmente no tendrá text nodes hijos aparte del suyo)
             removeAllChildTextNodes(el);
             el.textContent = rawValue;
             continue;
@@ -175,15 +208,11 @@
 
           // Por defecto: contenido rico. Evitar parsear simples nombres de clase.
           if (/^[\w- ]+$/.test(rawValue) && !rawValue.includes('\n')) {
-            // texto plano seguro
             el.textContent = rawValue;
           } else {
-            // contenido con posible Markdown/HTML: SOLO para elementos que realmente aceptan HTML
-            // evitar aplicarlo a elementos como <a>, <button>, etc.
             if (typeof marked !== 'undefined' && !/^(BUTTON|A|SPAN|H1|H2|H3|H4|H5|H6)$/.test(el.tagName)) {
               el.innerHTML = marked.parse(rawValue);
             } else {
-              // si no se puede parsear, poner texto plano para no introducir HTML no deseado
               el.textContent = rawValue;
             }
           }
@@ -216,6 +245,35 @@
     toRemove.forEach(n => n.parentNode.removeChild(n));
   }
 
+  // Elimina solo text nodes que contienen únicamente espacios o NBSP (utilidad adicional)
+  function removeWhitespaceOnlyTextNodes(root) {
+    if (!root) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+    const toRemove = [];
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (/^[\s\u00A0]*$/.test(node.nodeValue)) toRemove.push(node);
+    }
+    toRemove.forEach(n => n.parentNode && n.parentNode.removeChild(n));
+    if (root.normalize) root.normalize();
+  }
+
+  // Recorta y colapsa espacios en text nodes que tienen texto (utilidad adicional)
+  function trimTextNodes(root) {
+    if (!root) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+    const updates = [];
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (!/^[\s\u00A0]*$/.test(node.nodeValue)) {
+        const trimmed = node.nodeValue.replace(/\u00A0/g, ' ').replace(/\s+/g, ' ').trim();
+        if (trimmed !== node.nodeValue) updates.push({ node, value: trimmed });
+      }
+    }
+    updates.forEach(u => u.node.nodeValue = u.value);
+    if (root.normalize) root.normalize();
+  }
+
   // Aplica clase(s) de icono de forma segura, preservando otras clases no-icono
   function applyIconClass(el, classString) {
     const newClasses = String(classString || '').trim().split(/\s+/).filter(Boolean);
@@ -225,7 +283,10 @@
     const prefixRe = new RegExp('^(?:' + iconClassPrefixes.map(escapeForRegex).join('|') + ')');
 
     if (el.tagName === 'I') {
-      el.className = newClasses.join(' ');
+      // si vienen valores raros (como números) no los asignamos como clase
+      const filtered = newClasses.filter(c => /[A-Za-z_-]/.test(c));
+      if (!filtered.length) return;
+      el.className = filtered.join(' ');
       return;
     }
 
@@ -262,6 +323,8 @@
   // 1) loadSection para todos los bloques de contenido (adaptado bilingüe)
   //
   const currentLang = document.body.classList.contains("lang-en") ? "en" : "es";
+})();
+
 
   // --- HEADER: Con nuevos colores ---
   loadSection("header", {
