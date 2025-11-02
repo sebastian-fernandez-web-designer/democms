@@ -114,7 +114,7 @@
                 const idx = m ? m[1] : null;
                 const sizeKey = idx ? `service_icon_${idx}_size` : null;
                 const sizeVal = sizeKey && typeof data[sizeKey] !== 'undefined' ? Number(data[sizeKey]) : NaN;
-                const baseSize = (sizeVal && sizeVal > 0) ? sizeVal : 36;
+                const baseSize = (sizeVal && sizeVal > 0) ? sizeVal : 55;
                 const diameter = Math.round(baseSize * 1.8);
 
                 wrapper.style.width = diameter + 'px';
