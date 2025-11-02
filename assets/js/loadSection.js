@@ -398,11 +398,13 @@
 
 
 loadSection("services", {
-  // Color de fondo
+  // Color de fondo de la sección
   services_background_color: "services-section",
+  
   // Clave para el color del texto del subtítulo/iconos
   services_subtitle_color: "services-subtitle",
   services_subtitle_color_en: "services-subtitle-en",
+  
   // Encabezados
   services_subtitle_es: "services-subtitle",
   services_subtitle_en: "services-subtitle-en",
@@ -413,7 +415,7 @@ loadSection("services", {
   service_icon_1_class: "service-icon-1",
   service_icon_1_color: "service-icon-1",
   service_icon_1_size: "service-icon-1",
-  service_icon_1_bg: "service-icon-1",
+  service_icon_1_bg: "service-icon-wrapper-1", // <-- ¡CORREGIDO! Apunta al SPAN
   service_title_1_es: "service-title-1",
   service_title_1_en: "service-title-1-en",
   service_desc_1_es: "service-desc-1",
@@ -423,7 +425,7 @@ loadSection("services", {
   service_icon_2_class: "service-icon-2",
   service_icon_2_color: "service-icon-2",
   service_icon_2_size: "service-icon-2",
-  service_icon_2_bg: "service-icon-2",
+  service_icon_2_bg: "service-icon-wrapper-2", // <-- ¡CORREGIDO! Apunta al SPAN
   service_title_2_es: "service-title-2",
   service_title_2_en: "service-title-2-en",
   service_desc_2_es: "service-desc-2",
@@ -433,7 +435,7 @@ loadSection("services", {
   service_icon_3_class: "service-icon-3",
   service_icon_3_color: "service-icon-3",
   service_icon_3_size: "service-icon-3",
-  service_icon_3_bg: "service-icon-3",
+  service_icon_3_bg: "service-icon-wrapper-3", // <-- ¡CORREGIDO! Apunta al SPAN
   service_title_3_es: "service-title-3",
   service_title_3_en: "service-title-3-en",
   service_desc_3_es: "service-desc-3",
@@ -443,7 +445,7 @@ loadSection("services", {
   service_icon_4_class: "service-icon-4",
   service_icon_4_color: "service-icon-4",
   service_icon_4_size: "service-icon-4",
-  service_icon_4_bg: "service-icon-4",
+  service_icon_4_bg: "service-icon-wrapper-4", // <-- ¡CORREGIDO! Apunta al SPAN
   service_title_4_es: "service-title-4",
   service_title_4_en: "service-title-4-en",
   service_desc_4_es: "service-desc-4",
