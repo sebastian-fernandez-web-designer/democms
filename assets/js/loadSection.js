@@ -201,7 +201,6 @@ if (key === 'header_title_color' || key === 'header_subtitle_color') {
     header_button_text_en: "header-button-text-en",
 
     // NUEVOS MAPPINGS DE COLOR (colores separados):
-    header_text_color: "header-content-container", // color global del contenedor si lo quieres
     header_title_color: "header-title",             // color específico del título
     header_subtitle_color: "header-subtitle",       // color específico del subtítulo
     header_button_bg_color: "header-button-link"
