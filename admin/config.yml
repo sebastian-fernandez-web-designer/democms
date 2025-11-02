@@ -13,14 +13,21 @@ collections:
     label: "Contenido del sitio"
     files:
 
-      # HEADER
+# HEADER
       - label: "Header"
         name: "header"
         file: "content/header.md"
         fields:
           - { label: "Tipo de fondo", name: "header_background_mode", widget: "select", options: ["image","color"], default: "image" }
           - { label: "Imagen de fondo", name: "header_background", widget: "image" }
-          - { label: "Color de fondo", name: "header_background_color", widget: "color", default: "#1d809f" }
+          - { label: "Color de fondo de sección", name: "header_background_color", widget: "color", default: "#1d809f" }
+          
+          # NUEVOS CAMPOS DE COLOR 
+          - { label: "Color del texto (Título/Subtítulo)", name: "header_text_color", widget: "color", default: "#ffffff" }
+          - { label: "Color de fondo del botón", name: "header_button_bg_color", widget: "color", default: "#1d809f" }
+          - { label: "Color del texto del botón", name: "header_button_text_color", widget: "color", default: "#ffffff" }
+          # -----------------------------
+          
           - { label: "Título principal (ES)", name: "header_title_es", widget: "string" }
           - { label: "Título principal (EN)", name: "header_title_en", widget: "string" }
           - { label: "Subtítulo (ES)", name: "header_subtitle_es", widget: "string" }
