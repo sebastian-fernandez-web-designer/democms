@@ -279,8 +279,6 @@
   // 1) loadSection para todos los bloques de contenido (adaptado bilingüe)
   //
   const currentLang = document.body.classList.contains("lang-en") ? "en" : "es";
-})();
-
 
   // --- HEADER: Con nuevos colores ---
   loadSection("header", {
