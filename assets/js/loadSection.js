@@ -82,24 +82,34 @@
             continue;
           }
           
-          if (key.includes('_background_color')) {
-            el.style.backgroundColor = rawValue;
-            continue;
-          }
-          
-          // REGLA ESPECÍFICA para Fondo del Botón del Header
-          if (key === 'header_button_bg_color') {
-            el.style.backgroundColor = rawValue;
-            // Importante para sobrescribir el color del borde de Bootstrap
-            el.style.borderColor = rawValue; 
-            continue;
-          }
+if (key.includes('_background_color')) {
+            el.style.backgroundColor = rawValue;
+            continue;
+          }
+          
+          // REGLA ESPECÍFICA: Manejo COMPLETO del Botón del Header (Fondo y Texto)
+          if (key === 'header_button_bg_color') {
+            el.style.backgroundColor = rawValue;
+            // Importante para sobrescribir el color del borde de Bootstrap
+            el.style.borderColor = rawValue; 
+            
+            // Lógica para aplicar el color de texto a los <span> internos
+            const textColor = data['header_button_text_color'];
+            if (textColor) {
+              const spans = el.querySelectorAll('span');
+              spans.forEach(span => {
+                // Aplicamos el color de texto directamente a los spans
+                span.style.color = textColor; 
+              });
+            }
+            continue;
+          }
 
-          // REGLA GENERAL para Color de Texto (aplica a header_text_color y header_button_text_color)
-          if (key.includes('_color')) {
-            el.style.color = rawValue;
-            continue;
-          }
+          // REGLA GENERAL para Color de Texto (SOLO aplica ahora a header_text_color)
+          if (key.includes('_color')) {
+            el.style.color = rawValue;
+            continue;
+          }
 
           if (el.tagName === 'SPAN') {
             el.innerHTML = rawValue;
@@ -166,25 +176,25 @@
   //
   const currentLang = document.body.classList.contains("lang-en") ? "en" : "es";
 
-  // --- HEADER: Con nuevos colores ---
-  loadSection("header", {
-    header_background: "header-background",
-    header_background_color: "header-section",
-    header_background_mode: "header-section",
-    header_title_es: "header-title",
-    header_title_en: "header-title-en",
-    header_subtitle_es: "header-subtitle",
-    header_subtitle_en: "header-subtitle-en",
-    header_button_link: "header-button-link",
-    header_button_text_es: "header-button-text",
-    header_button_text_en: "header-button-text-en",
-    
-    // NUEVOS MAPPINGS DE COLOR:
-    header_text_color: "header-content-container", // Color de texto principal
-    header_button_bg_color: "header-button-link", // Color de fondo del botón
-    header_button_text_color: "header-button-link" // Color de texto del botón
-  });
-  // ---------------------------------
+// --- HEADER: Con nuevos colores ---
+  loadSection("header", {
+    header_background: "header-background",
+    header_background_color: "header-section",
+    header_background_mode: "header-section",
+    header_title_es: "header-title",
+    header_title_en: "header-title-en",
+    header_subtitle_es: "header-subtitle",
+    header_subtitle_en: "header-subtitle-en",
+    header_button_link: "header-button-link",
+    header_button_text_es: "header-button-text",
+    header_button_text_en: "header-button-text-en",
+    
+    // NUEVOS MAPPINGS DE COLOR:
+    header_text_color: "header-content-container", // Color de texto principal (Usando regla general)
+    header_button_bg_color: "header-button-link", // Color de fondo del botón (Usando regla específica, que también maneja el color de texto)
+    // header_button_text_color ya no mapea a un ID, su valor es leído internamente
+  });
+  // ---------------------------------
 
   loadSection("about", {
     // Color de fondo
