@@ -3,9 +3,9 @@ header_background_mode: color
 header_background: /img/uploads/bg-masthead.jpg
 header_background_color: '#000000'
 header_text_color: '#f3b903'
-header_title_color: '#ffffff'
-header_subtitle_color: '#ffd700'
-header_button_bg_color: '#ff0000'
+header_title_color: '#ff00f7'
+header_subtitle_color: '#0033ff'
+header_button_bg_color: '#398f32'
 header_button_text_color: '#ffffff'
 header_title_es: Bienvenido a Mi Portafolio.
 header_title_en: Welcome to My Portfolio.
