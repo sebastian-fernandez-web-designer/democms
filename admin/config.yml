@@ -23,9 +23,13 @@ collections:
           - { label: "Color de fondo de sección", name: "header_background_color", widget: "color", default: "#1d809f" }
           
           # NUEVOS CAMPOS DE COLOR 
+          # NUEVOS CAMPOS DE COLOR 
           - { label: "Color del texto (Título/Subtítulo)", name: "header_text_color", widget: "color", default: "#ffffff" }
+          - { label: "Color del título", name: "header_title_color", widget: "color", default: "" }
+          - { label: "Color del subtítulo", name: "header_subtitle_color", widget: "color", default: "" }
           - { label: "Color de fondo del botón", name: "header_button_bg_color", widget: "color", default: "#1d809f" }
           - { label: "Color del texto del botón", name: "header_button_text_color", widget: "color", default: "#ffffff" }
+
           # -----------------------------
           
           - { label: "Título principal (ES)", name: "header_title_es", widget: "string" }
