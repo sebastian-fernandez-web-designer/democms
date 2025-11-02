@@ -99,12 +99,20 @@
             continue;
           }
 
+          // PRIORIDAD: regla específica para color del título o subtítulo (aplica también a la versión -en si existe)
+          if (key === 'header_title_color' || key === 'header_subtitle_color') {
+            el.style.color = rawValue;
+            const enEl = document.getElementById(elementId + '-en');
+            if (enEl) enEl.style.color = rawValue;
+            continue;
+          }
+
           if (key.includes('_background_color')) {
             el.style.backgroundColor = rawValue;
             continue;
           }
 
-          // REGLA GENERAL para Color de Texto
+          // REGLA GENERAL para Color de Texto (se ejecuta solo si no hay una regla más específica)
           if (key.includes('_color')) {
             el.style.color = rawValue;
             continue;
@@ -188,11 +196,13 @@
     header_button_text_es: "header-button-text",
     header_button_text_en: "header-button-text-en",
 
-    // NUEVOS MAPPINGS DE COLOR:
-    header_text_color: "header-content-container",
+    // NUEVOS MAPPINGS DE COLOR (colores separados):
+    header_text_color: "header-content-container", // color global del contenedor si lo quieres
+    header_title_color: "header-title",             // color específico del título
+    header_subtitle_color: "header-subtitle",       // color específico del subtítulo
     header_button_bg_color: "header-button-link"
     // header_button_text_color ya no mapea a un ID, su valor es leído internamente
-  });
+  });
   // ---------------------------------
 
   loadSection("about", {
