@@ -38,6 +38,7 @@ collections:
           - { label: "Texto del botón (ES)", name: "header_button_text_es", widget: "string" }
           - { label: "Texto del botón (EN)", name: "header_button_text_en", widget: "string" }
           - { label: "Enlace del botón", name: "header_button_link", widget: "string" }
+          - { label: "Mostrar pie de demo/temporizador", name: "show_demo_timer", widget: "boolean", default: false } # <--- ¡Añadido!
 
       # ABOUT
       - label: "About"
