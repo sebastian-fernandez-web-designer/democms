@@ -11,7 +11,9 @@ public_folder: "/img/uploads"
 collections:
   - name: "site_content"
     label: "Contenido del sitio"
-files:
+    files: # <- Asegúrate de que tenga los dos puntos y esté alineado con 'name' y 'label'
+      
+      # HEADER (Primer elemento de la lista files: un guion y dos espacios de indentación)
       - label: "Header"
         name: "header"
         file: "content/header.md"
@@ -19,15 +21,11 @@ files:
           - { label: "Tipo de fondo", name: "header_background_mode", widget: "select", options: ["image","color"], default: "image" }
           - { label: "Imagen de fondo", name: "header_background", widget: "image" }
           - { label: "Color de fondo de sección", name: "header_background_color", widget: "color", default: "#1d809f" }
-          
-          # NUEVOS CAMPOS DE COLOR 
+          # ... (resto de fields)
           - { label: "Color del título", name: "header_title_color", widget: "color", default: "" }
           - { label: "Color del subtítulo", name: "header_subtitle_color", widget: "color", default: "" }
           - { label: "Color de fondo del botón", name: "header_button_bg_color", widget: "color", default: "#1d809f" }
           - { label: "Color del texto del botón", name: "header_button_text_color", widget: "color", default: "#ffffff" }
-          
-          # -----------------------------
-          
           - { label: "Título principal (ES)", name: "header_title_es", widget: "string" }
           - { label: "Título principal (EN)", name: "header_title_en", widget: "string" }
           - { label: "Subtítulo (ES)", name: "header_subtitle_es", widget: "string" }
@@ -35,8 +33,6 @@ files:
           - { label: "Texto del botón (ES)", name: "header_button_text_es", widget: "string" }
           - { label: "Texto del botón (EN)", name: "header_button_text_en", widget: "string" }
           - { label: "Enlace del botón", name: "header_button_link", widget: "string" }
-        
-        # EL BLOQUE CRÍTICO: Debe estar alineado con 'fields:'
         editor:
           preview:
             script: /admin/previews/header-preview.js
