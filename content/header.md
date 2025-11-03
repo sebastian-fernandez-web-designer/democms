@@ -13,5 +13,6 @@ header_subtitle_en: A Free Bootstrap Theme.
 header_button_text_es: Saber Más.
 header_button_text_en: Find Out More...
 header_button_link: '#about-section'
+show_demo_timer: false 
 ---
 
