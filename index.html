@@ -17,6 +17,9 @@
 </head>
 
 <body class="lang-es" id="page-top">
+  <div id="preloader">
+    <div class="loader"></div> 
+</div>
     <a class="menu-toggle rounded" href="#"><i class="fa fa-bars"></i></a>
     <nav class="navbar navbar-expand" id="sidebar-wrapper">
         <div class="container">
@@ -37,51 +40,59 @@
     
 <!-- HEADER -->
 <header id="header-section" class="d-flex masthead" style="position: relative; overflow: hidden;">
-    <div class="lang-selector-header">
-    <div class="dropdown">
-      <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-        🌐 <span class="lang-es">Idioma</span><span class="lang-en">Language</span>
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="langDropdown">
-        <li><a class="dropdown-item lang-option" data-lang="es">Español</a></li>
-        <li><a class="dropdown-item lang-option" data-lang="en">English</a></li>
-      </ul>
-    </div>
-  </div>
+  <div class="lang-selector-header">
+      <div class="dropdown">
+          <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              🌐 <span class="lang-es">Idioma</span><span class="lang-en">Language</span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="langDropdown">
+              <li><a class="dropdown-item lang-option" data-lang="es">Español</a></li>
+              <li><a class="dropdown-item lang-option" data-lang="en">English</a></li>
+          </ul>
+      </div>
+  </div>
 
-  <img id="header-background" src="img/uploads/bg-masthead.jpg" alt="Fondo Header" class="header-cover" />
+  <img id="header-background" src="" alt="Fondo Header" class="header-cover" />
 
-  <div id="header-content-container" class="container text-center my-auto">
-    <h1 id="header-title" class="mb-1 lang-es">Bienvenido a Mi Portafolio</h1>
-    <h1 id="header-title-en" class="mb-1 lang-en">Welcome to My Portfolio</h1>
+  <div id="header-content-container" class="container text-center my-auto">
+      <h1 id="header-title" class="mb-1">
+          <span class="lang-es"></span>
+          <span class="lang-en"></span>
+      </h1>
+      
+      <h3 id="header-subtitle" class="mb-5">
+          <em>
+              <span class="lang-es"></span>
+              <span class="lang-en"></span>
+          </em>
+      </h3>
 
-    <h3 id="header-subtitle" class="mb-5 lang-es"><em>Un tema gratuito de Bootstrap</em></h3>
-    <h3 id="header-subtitle-en" class="mb-5 lang-en"><em>A Free Bootstrap Theme</em></h3>
-
-    <a id="header-button-link" class="btn btn-primary btn-xl" role="button" href="#about">
-      <span id="header-button-text" class="lang-es">Saber Más</span>
-      <span id="header-button-text-en" class="lang-en">Find Out More</span>
-    </a>
-  </div>
+      <a id="header-button-link" class="btn btn-primary btn-xl" role="button" href="#">
+          <span class="lang-es"></span>
+          <span class="lang-en"></span>
+      </a>
+  </div>
 </header>
 
 <!-- ABOUT -->
 <section class="content-section" id="about-section">
   <div class="container text-center">
-    <div class="row">
-      <div class="col-lg-10 mx-auto">
-        <h2 id="about-title" class="lang-es">Nuestro Portafolio es Perfecto para tu Próximo Proyecto</h2>
-        <h2 id="about-title-en" class="lang-en">Our Portfolio is Perfect for Your Next Project</h2>
-
-        <p id="about-subtitle" class="lead mb-5 lang-es">Este tema cuenta con un menú lateral flexible y fotos de stock gratuitas.</p>
-        <p id="about-subtitle-en" class="lead mb-5 lang-en">This theme features a flexible sidebar menu and free stock photos.</p>
-
-        <a id="about-button-link" class="btn btn-dark btn-xl" role="button" href="#services">
-          <span id="about-button-text" class="lang-es">Lo Que Ofrecemos</span>
-          <span id="about-button-text-en" class="lang-en">What We Offer</span>
-        </a>
+      <div class="row">
+          <div class="col-lg-10 mx-auto">
+              <h2 id="about-title">
+                  <span class="lang-es"></span> 
+                  <span class="lang-en"></span>
+              </h2>
+              <p id="about-subtitle" class="lead mb-5">
+                  <span class="lang-es"></span>
+                  <span class="lang-en"></span>
+              </p>
+              <a id="about-button-link" class="btn btn-dark btn-xl" role="button" href="#services">
+                  <span class="lang-es"></span>
+                  <span class="lang-en"></span>
+              </a>
+          </div>
       </div>
-    </div>
   </div>
 </section>
 
@@ -89,55 +100,85 @@
 <!-- SERVICES -->
 <section class="text-center text-white content-section" id="services-section">
   <div class="container">
-    <div class="content-section-heading">
-      <h3 id="services-subtitle" class="mb-0 lang-es">Servicios</h3>
-      <h3 id="services-subtitle-en" class="mb-0 lang-en">Services</h3>
+      <div class="content-section-heading">
+          <h3 id="services-subtitle" class="mb-0">
+              <span class="lang-es">Servicios</span>
+              <span class="lang-en">Services</span>
+          </h3>
 
-      <h2 id="services-title" class="mb-5 lang-es">Lo Que Ofrecemos</h2>
-      <h2 id="services-title-en" class="mb-5 lang-en">What We Offer</h2>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
-        <span id="service-icon-wrapper-1" class="rounded-circle mb-3 mx-auto service-icon">
-          <i id="service-icon-1" class="icon-screen-smartphone" aria-hidden="true"></i>
-        </span>
-        <h4 id="service-title-1" class="lang-es"><strong>Responsivo</strong></h4>
-        <h4 id="service-title-1-en" class="lang-en"><strong>Responsive</strong></h4>
-        <p id="service-desc-1" class="mb-0 text-faded lang-es">Se ve genial en cualquier tamaño de pantalla.</p>
-        <p id="service-desc-1-en" class="mb-0 text-faded lang-en">Looks great on any screen size!</p>
+          <h2 id="services-title" class="mb-5">
+              <span class="lang-es">Lo Que Ofrecemos</span>
+              <span class="lang-en">What We Offer</span>
+          </h2>
       </div>
 
-      <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
-        <span id="service-icon-wrapper-2" class="rounded-circle mb-3 mx-auto service-icon">
-          <i id="service-icon-2" class="icon-pencil" aria-hidden="true"></i>
-        </span>
-        <h4 id="service-title-2" class="lang-es"><strong>Rediseñado</strong></h4>
-        <h4 id="service-title-2-en" class="lang-en"><strong>Redesigned</strong></h4>
-        <p id="service-desc-2" class="mb-0 text-faded lang-es">Actualizado para Bootstrap 5.</p>
-        <p id="service-desc-2-en" class="mb-0 text-faded lang-en">Freshly redesigned for Bootstrap 5.</p>
-      </div>
+      <div class="row">
+          <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+              <span id="service-icon-wrapper-1" class="rounded-circle mb-3 mx-auto service-icon">
+                  <i id="service-icon-1" class="icon-screen-smartphone" aria-hidden="true"></i>
+              </span>
+              
+              <h4 id="service-title-1">
+                  <strong>
+                      <span class="lang-es">Responsivo</span>
+                      <span class="lang-en">Responsive</span>
+                  </strong>
+              </h4>
 
-      <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
-        <span id="service-icon-wrapper-3" class="rounded-circle mb-3 mx-auto service-icon">
-          <i id="service-icon-3" class="icon-like" aria-hidden="true"></i>
-        </span>
-        <h4 id="service-title-3" class="lang-es"><strong>Favorito</strong></h4>
-        <h4 id="service-title-3-en" class="lang-en"><strong>Favorited</strong></h4>
-        <p id="service-desc-3" class="mb-0 text-faded lang-es">Millones de usuarios lo han probado.</p>
-        <p id="service-desc-3-en" class="mb-0 text-faded lang-en">Millions of users have tried it.</p>
-      </div>
+              <p id="service-desc-1" class="mb-0 text-faded">
+                  <span class="lang-es">Se ve genial en cualquier tamaño de pantalla.</span>
+                  <span class="lang-en">Looks great on any screen size!</span>
+              </p>
+          </div>
 
-      <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
-        <span id="service-icon-wrapper-4" class="rounded-circle mb-3 mx-auto service-icon">
-          <i id="service-icon-4" class="icon-mustache" aria-hidden="true"></i>
-        </span>
-        <h4 id="service-title-4" class="lang-es"><strong>Pregunta</strong></h4>
-        <h4 id="service-title-4-en" class="lang-en"><strong>Question</strong></h4>
-        <p id="service-desc-4" class="mb-0 text-faded lang-es">Siempre tenemos la respuesta que buscas.</p>
-        <p id="service-desc-4-en" class="mb-0 text-faded lang-en">We always have the answer you’re looking for.</p>
+          <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+              <span id="service-icon-wrapper-2" class="rounded-circle mb-3 mx-auto service-icon">
+                  <i id="service-icon-2" class="icon-pencil" aria-hidden="true"></i>
+              </span>
+              <h4 id="service-title-2">
+                  <strong>
+                      <span class="lang-es">Rediseñado</span>
+                      <span class="lang-en">Redesigned</span>
+                  </strong>
+              </h4>
+              <p id="service-desc-2" class="mb-0 text-faded">
+                  <span class="lang-es">Actualizado para Bootstrap 5.</span>
+                  <span class="lang-en">Freshly redesigned for Bootstrap 5.</span>
+              </p>
+          </div>
+
+          <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+              <span id="service-icon-wrapper-3" class="rounded-circle mb-3 mx-auto service-icon">
+                  <i id="service-icon-3" class="icon-like" aria-hidden="true"></i>
+              </span>
+              <h4 id="service-title-3">
+                  <strong>
+                      <span class="lang-es">Favorito</span>
+                      <span class="lang-en">Favorited</span>
+                  </strong>
+              </h4>
+              <p id="service-desc-3" class="mb-0 text-faded">
+                  <span class="lang-es">Millones de usuarios lo han probado.</span>
+                  <span class="lang-en">Millions of users have tried it.</span>
+              </p>
+          </div>
+
+          <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+              <span id="service-icon-wrapper-4" class="rounded-circle mb-3 mx-auto service-icon">
+                  <i id="service-icon-4" class="icon-mustache" aria-hidden="true"></i>
+              </span>
+              <h4 id="service-title-4">
+                  <strong>
+                      <span class="lang-es">Pregunta</span>
+                      <span class="lang-en">Question</span>
+                  </strong>
+              </h4>
+              <p id="service-desc-4" class="mb-0 text-faded">
+                  <span class="lang-es">Siempre tenemos la respuesta que buscas.</span>
+                  <span class="lang-en">We always have the answer you’re looking for.</span>
+              </p>
+          </div>
       </div>
-    </div>
   </div>
 </section>
 
@@ -145,13 +186,15 @@
 <section id="callout-section" class="content-section text-center d-flex justify-content-center align-items-center" style="background: none; position: relative; overflow: hidden;">
   <img id="callout-background" src="/img/uploads/bg-callout.jpg" alt="Fondo de la sección" class="header-cover">
   <div class="container text-center">
-    <h2 id="callout-title" class="mb-5 mx-auto lang-es">Bienvenido al nuevo sitio web</h2>
-    <h2 id="callout-title-en" class="mb-5 mx-auto lang-en">Welcome to the new website</h2>
+      <h2 id="callout-title" class="mb-5 mx-auto">
+          <span class="lang-es">Bienvenido al nuevo sitio web</span>
+          <span class="lang-en">Welcome to the new website</span>
+      </h2>
 
-    <a id="callout-button-link" class="btn btn-primary btn-xl" role="button" href="#">
-      <span id="callout-button-text" class="lang-es">Descargar Ahora</span>
-      <span id="callout-button-text-en" class="lang-en">Download Now!</span>
-    </a>
+      <a id="callout-button-link" class="btn btn-primary btn-xl" role="button" href="#">
+          <span class="lang-es">Descargar Ahora</span>
+          <span class="lang-en">Download Now!</span>
+      </a>
   </div>
 </section>
 
@@ -159,69 +202,91 @@
 <!-- PORTFOLIO -->
 <section id="portfolio" class="content-section">
   <div class="container">
-    <div class="content-section-heading text-center">
-      <h3 class="text-secondary mb-0 lang-es">Portafolio</h3>
-      <h3 class="text-secondary mb-0 lang-en">Portfolio</h3>
-      <h2 class="mb-5 lang-es">Proyectos Recientes</h2>
-      <h2 class="mb-5 lang-en">Recent Projects</h2>
-    </div>
-    <div class="row g-0">
-      <div class="col-lg-6">
-        <a class="portfolio-item" href="#">
-          <div class="caption">
-            <div class="caption-content">
-              <h2 id="portfolio-title-1" class="lang-es">Estacionario</h2>
-              <h2 id="portfolio-title-1-en" class="lang-en">Stationary</h2>
-              <p id="portfolio-desc-1" class="mb-0 lang-es">Un lápiz amarillo con sobres sobre un fondo limpio azul.</p>
-              <p id="portfolio-desc-1-en" class="mb-0 lang-en">A yellow pencil with envelopes on a clean blue background.</p>
-            </div>
-          </div>
-          <img id="portfolio-img-1" class="portfolio-img" src="assets/img/portfolio-1.jpg">
-        </a>
+      <div class="content-section-heading text-center">
+          <h3 class="text-secondary mb-0" id="portfolio-subtitle">
+              <span class="lang-es">Portafolio</span>
+              <span class="lang-en">Portfolio</span>
+          </h3>
+
+          <h2 class="mb-5" id="portfolio-title-main">
+              <span class="lang-es">Proyectos Recientes</span>
+              <span class="lang-en">Recent Projects</span>
+          </h2>
       </div>
 
-      <div class="col-lg-6">
-        <a class="portfolio-item" href="#">
-          <div class="caption">
-            <div class="caption-content">
-              <h2 id="portfolio-title-2" class="lang-es">Helado</h2>
-              <h2 id="portfolio-title-2-en" class="lang-en">Ice Cream</h2>
-              <p id="portfolio-desc-2" class="mb-0 lang-es">Un fondo azul oscuro con un lápiz de color, un clip y un pequeño helado.</p>
-              <p id="portfolio-desc-2-en" class="mb-0 lang-en">A dark blue background with a colored pencil, a clip, and a small ice cream.</p>
-            </div>
+      <div class="row g-0">
+          <div class="col-lg-6">
+              <a class="portfolio-item" href="#">
+                  <div class="caption">
+                      <div class="caption-content">
+                          <h2 id="portfolio-title-1">
+                              <span class="lang-es">Estacionario</span>
+                              <span class="lang-en">Stationary</span>
+                          </h2>
+                          <p id="portfolio-desc-1" class="mb-0">
+                              <span class="lang-es">Un lápiz amarillo con sobres sobre un fondo limpio azul.</span>
+                              <span class="lang-en">A yellow pencil with envelopes on a clean blue background.</span>
+                          </p>
+                      </div>
+                  </div>
+                  <img id="portfolio-img-1" class="portfolio-img" src="assets/img/portfolio-1.jpg">
+              </a>
           </div>
-          <img id="portfolio-img-2" class="portfolio-img" src="assets/img/portfolio-2.jpg">
-        </a>
-      </div>
 
-      <div class="col-lg-6">
-        <a class="portfolio-item" href="#">
-          <div class="caption">
-            <div class="caption-content">
-              <h2 id="portfolio-title-3" class="lang-es">Fresas</h2>
-              <h2 id="portfolio-title-3-en" class="lang-en">Strawberries</h2>
-              <p id="portfolio-desc-3" class="mb-0 lang-es">Las fresas son un snack delicioso con un poco de azúcar encima.</p>
-              <p id="portfolio-desc-3-en" class="mb-0 lang-en">Strawberries are a tasty snack with a little sugar on top.</p>
-            </div>
+          <div class="col-lg-6">
+              <a class="portfolio-item" href="#">
+                  <div class="caption">
+                      <div class="caption-content">
+                          <h2 id="portfolio-title-2">
+                              <span class="lang-es">Helado</span>
+                              <span class="lang-en">Ice Cream</span>
+                          </h2>
+                          <p id="portfolio-desc-2" class="mb-0">
+                              <span class="lang-es">Un fondo azul oscuro con un lápiz de color, un clip y un pequeño helado.</span>
+                              <span class="lang-en">A dark blue background with a colored pencil, a clip, and a small ice cream.</span>
+                          </p>
+                      </div>
+                  </div>
+                  <img id="portfolio-img-2" class="portfolio-img" src="assets/img/portfolio-2.jpg">
+              </a>
           </div>
-          <img id="portfolio-img-3" class="portfolio-img" src="assets/img/portfolio-3.jpg">
-        </a>
-      </div>
 
-      <div class="col-lg-6">
-        <a class="portfolio-item" href="#">
-          <div class="caption">
-            <div class="caption-content">
-              <h2 id="portfolio-title-4" class="lang-es">Espacio de Trabajo</h2>
-              <h2 id="portfolio-title-4-en" class="lang-en">Workspace</h2>
-              <p id="portfolio-desc-4" class="mb-0 lang-es">Un espacio de trabajo amarillo con tijeras, lápices y otros objetos.</p>
-              <p id="portfolio-desc-4-en" class="mb-0 lang-en">A yellow workspace with scissors, pencils, and other objects.</p>
-            </div>
+          <div class="col-lg-6">
+              <a class="portfolio-item" href="#">
+                  <div class="caption">
+                      <div class="caption-content">
+                          <h2 id="portfolio-title-3">
+                              <span class="lang-es">Fresas</span>
+                              <span class="lang-en">Strawberries</span>
+                          </h2>
+                          <p id="portfolio-desc-3" class="mb-0">
+                              <span class="lang-es">Las fresas son un snack delicioso con un poco de azúcar encima.</span>
+                              <span class="lang-en">Strawberries are a tasty snack with a little sugar on top.</span>
+                          </p>
+                      </div>
+                  </div>
+                  <img id="portfolio-img-3" class="portfolio-img" src="assets/img/portfolio-3.jpg">
+              </a>
           </div>
-          <img id="portfolio-img-4" class="portfolio-img" src="assets/img/portfolio-4.jpg">
-        </a>
+
+          <div class="col-lg-6">
+              <a class="portfolio-item" href="#">
+                  <div class="caption">
+                      <div class="caption-content">
+                          <h2 id="portfolio-title-4">
+                              <span class="lang-es">Espacio de Trabajo</span>
+                              <span class="lang-en">Workspace</span>
+                          </h2>
+                          <p id="portfolio-desc-4" class="mb-0">
+                              <span class="lang-es">Un espacio de trabajo amarillo con tijeras, lápices y otros objetos.</span>
+                              <span class="lang-en">A yellow workspace with scissors, pencils, and other objects.</span>
+                          </p>
+                      </div>
+                  </div>
+                  <img id="portfolio-img-4" class="portfolio-img" src="assets/img/portfolio-4.jpg">
+              </a>
+          </div>
       </div>
-    </div>
   </div>
 </section>
 
@@ -229,18 +294,20 @@
 <!-- CTA -->
 <section id="cta-section" class="content-section">
   <div class="container text-center">
-    <h2 id="cta-title" class="mb-4 lang-es">Los botones de abajo son imposibles de resistir..</h2>
-    <h2 id="cta-title-en" class="mb-4 lang-en">The buttons below are impossible to resist..</h2>
+      <h2 id="cta-title" class="mb-4">
+          <span class="lang-es">Los botones de abajo son imposibles de resistir..</span>
+          <span class="lang-en">The buttons below are impossible to resist..</span>
+      </h2>
 
-    <a id="cta-button-1-link" class="btn btn-light me-4 btn-xl" role="button" href="#">
-      <span id="cta-button-1-text" class="lang-es">¡Haz Clic!</span>
-      <span id="cta-button-1-text-en" class="lang-en">Click Me!</span>
-    </a>
+      <a id="cta-button-1-link" class="btn btn-light me-4 btn-xl" role="button" href="#">
+          <span class="lang-es">¡Haz Clic!</span>
+          <span class="lang-en">Click Me!</span>
+      </a>
 
-    <a id="cta-button-2-link" class="btn btn-dark me-4 btn-xl" role="button" href="#">
-      <span id="cta-button-2-text" class="lang-es">Mírame</span>
-      <span id="cta-button-2-text-en" class="lang-en">Look at Me</span>
-    </a>
+      <a id="cta-button-2-link" class="btn btn-dark me-4 btn-xl" role="button" href="#">
+          <span class="lang-es">Mírame</span>
+          <span class="lang-en">Look at Me</span>
+      </a>
   </div>
 </section>
 
@@ -248,25 +315,27 @@
 <!-- FOOTER -->
 <footer class="text-center footer" id="footer-section">
   <div class="container">
-    <ul class="list-inline mb-5">
-      <li class="list-inline-item">
-        <a id="footer-link-facebook" class="link-light rounded-circle social-link" href="#">
-          <i class="icon-social-facebook"></i>
-        </a>
-      </li>
-      <li class="list-inline-item">
-        <a id="footer-link-twitter" class="link-light rounded-circle social-link" href="#">
-          <i class="icon-social-twitter"></i>
-        </a>
-      </li>
-      <li class="list-inline-item">
-        <a id="footer-link-github" class="link-light rounded-circle social-link" href="#">
-          <i class="icon-social-github"></i>
-        </a>
-      </li>
-    </ul>
-    <p id="footer-copy-text" class="text-muted mb-0 small lang-es">Copyright © Mi Marca 2025</p>
-    <p id="footer-copy-text-en" class="text-muted mb-0 small lang-en">Copyright © My Brand 2025</p>
+      <ul class="list-inline mb-5">
+          <li class="list-inline-item">
+              <a id="footer-link-facebook" class="link-light rounded-circle social-link" href="#">
+                  <i class="icon-social-facebook"></i>
+              </a>
+          </li>
+          <li class="list-inline-item">
+              <a id="footer-link-twitter" class="link-light rounded-circle social-link" href="#">
+                  <i class="icon-social-twitter"></i>
+              </a>
+          </li>
+          <li class="list-inline-item">
+              <a id="footer-link-github" class="link-light rounded-circle social-link" href="#">
+                  <i class="icon-social-github"></i>
+              </a>
+          </li>
+      </ul>
+      <p id="footer-copy-text" class="text-muted mb-0 small">
+          <span class="lang-es">Copyright © Mi Marca 2025</span>
+          <span class="lang-en">Copyright © My Brand 2025</span>
+      </p>
   </div>
   <a class="rounded scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </footer>
