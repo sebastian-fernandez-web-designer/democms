@@ -12,36 +12,38 @@ collections:
   - name: "site_content"
     label: "Contenido del sitio"
     files:
+    # ---------------------------------------------
+    # 1. INDENTACIÓN CORREGIDA para el primer archivo de la lista
+    - label: "Header" # <-- Alineado con 'name', 'label', 'files' si no hay otros archivos antes.
+      name: "header"
+      file: "content/header.md"
+      fields:
+        - { label: "Tipo de fondo", name: "header_background_mode", widget: "select", options: ["image","color"], default: "image" }
+        - { label: "Imagen de fondo", name: "header_background", widget: "image" }
+        - { label: "Color de fondo de sección", name: "header_background_color", widget: "color", default: "#1d809f" }
+        
+        # NUEVOS CAMPOS DE COLOR 
+        - { label: "Color del título", name: "header_title_color", widget: "color", default: "" }
+        - { label: "Color del subtítulo", name: "header_subtitle_color", widget: "color", default: "" }
+        - { label: "Color de fondo del botón", name: "header_button_bg_color", widget: "color", default: "#1d809f" }
+        - { label: "Color del texto del botón", name: "header_button_text_color", widget: "color", default: "#ffffff" }
 
-# HEADER
-      - label: "Header"
-        name: "header"
-        file: "content/header.md"
-        fields:
-          - { label: "Tipo de fondo", name: "header_background_mode", widget: "select", options: ["image","color"], default: "image" }
-          - { label: "Imagen de fondo", name: "header_background", widget: "image" }
-          - { label: "Color de fondo de sección", name: "header_background_color", widget: "color", default: "#1d809f" }
-          
-          # NUEVOS CAMPOS DE COLOR 
-          - { label: "Color del título", name: "header_title_color", widget: "color", default: "" }
-          - { label: "Color del subtítulo", name: "header_subtitle_color", widget: "color", default: "" }
-          - { label: "Color de fondo del botón", name: "header_button_bg_color", widget: "color", default: "#1d809f" }
-          - { label: "Color del texto del botón", name: "header_button_text_color", widget: "color", default: "#ffffff" }
-
-          # -----------------------------
-          
-          - { label: "Título principal (ES)", name: "header_title_es", widget: "string" }
-          - { label: "Título principal (EN)", name: "header_title_en", widget: "string" }
-          - { label: "Subtítulo (ES)", name: "header_subtitle_es", widget: "string" }
-          - { label: "Subtítulo (EN)", name: "header_subtitle_en", widget: "string" }
-          - { label: "Texto del botón (ES)", name: "header_button_text_es", widget: "string" }
-          - { label: "Texto del botón (EN)", name: "header_button_text_en", widget: "string" }
-          - { label: "Enlace del botón", name: "header_button_link", widget: "string" }
-        
-        # BLOQUE CORREGIDO:
-        editor:
-          preview:
-            script: /admin/previews/header-preview.js
+        # -----------------------------
+        
+        - { label: "Título principal (ES)", name: "header_title_es", widget: "string" }
+        - { label: "Título principal (EN)", name: "header_title_en", widget: "string" }
+        - { label: "Subtítulo (ES)", name: "header_subtitle_es", widget: "string" }
+        - { label: "Subtítulo (EN)", name: "header_subtitle_en", widget: "string" }
+        - { label: "Texto del botón (ES)", name: "header_button_text_es", widget: "string" }
+        - { label: "Texto del botón (EN)", name: "header_button_text_en", widget: "string" }
+        - { label: "Enlace del botón", name: "header_button_link", widget: "string" }
+      
+      # BLOQUE DE PREVIEW (Asegúrate de que 'editor' y sus subpropiedades
+      # estén alineadas con 'fields', 'name', 'file', etc.)
+      editor:
+        preview:
+          script: /admin/previews/header-preview.js # Espacio después de ':'
+    # ---------------------------------------------
 
       # ABOUT
       - label: "About"
