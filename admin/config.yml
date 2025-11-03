@@ -23,7 +23,6 @@ collections:
           - { label: "Color de fondo de sección", name: "header_background_color", widget: "color", default: "#1d809f" }
           
           # NUEVOS CAMPOS DE COLOR 
-          # NUEVOS CAMPOS DE COLOR 
           - { label: "Color del título", name: "header_title_color", widget: "color", default: "" }
           - { label: "Color del subtítulo", name: "header_subtitle_color", widget: "color", default: "" }
           - { label: "Color de fondo del botón", name: "header_button_bg_color", widget: "color", default: "#1d809f" }
@@ -38,6 +37,10 @@ collections:
           - { label: "Texto del botón (ES)", name: "header_button_text_es", widget: "string" }
           - { label: "Texto del botón (EN)", name: "header_button_text_en", widget: "string" }
           - { label: "Enlace del botón", name: "header_button_link", widget: "string" }
+        
+        # 🎯 BLOQUE AGREGADO PARA ACTIVAR EL LIVE PREVIEW
+        editor:
+          preview: /admin/previews/header-preview.js
 
       # ABOUT
       - label: "About"
