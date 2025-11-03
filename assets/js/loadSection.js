@@ -8,6 +8,26 @@
       })
       .then(text => {
         const data = parseFrontMatter(text);
+        // =============================================================
+        // NUEVA LÓGICA: CONTROL VISUAL DE FOOTER Y TEMPORIZADOR DE DEMO
+        // =============================================================
+        const showDemoKey = 'show_demo_timer';
+        // Solo ejecutamos si es la sección 'header' (donde definiste la clave en el CMS)
+        if (sectionName === 'header' && typeof data[showDemoKey] !== 'undefined') {
+          
+          const rawValue = String(data[showDemoKey]).trim().toLowerCase();
+          const isVisible = rawValue === 'true'; 
+          
+          const footer = document.getElementById('demo-footer');
+          const timer = document.getElementById('demo-timer');
+          
+          // Usamos '' para que el CSS original (position: fixed) funcione al mostrar
+          const displayStyle = isVisible ? '' : 'none'; 
+
+          if (footer) footer.style.display = displayStyle;
+          if (timer) timer.style.display = displayStyle;
+        }
+        // =============================================================
 
         for (const key in mapping) {
           const elementId = mapping[key];
