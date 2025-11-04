@@ -1,7 +1,7 @@
 ---
 header_background_mode: color
 header_background: /img/uploads/sincerely-media-kjRquiHitG4-unsplash.jpg
-header_background_color: '#121212'
+header_background_color: '#4a4a4a'
 header_title_color: '#f5faff'
 header_subtitle_color: '#d8e0e9'
 header_button_bg_color: '#000000'
