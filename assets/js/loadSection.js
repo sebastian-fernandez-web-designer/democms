@@ -449,7 +449,10 @@
   
   
     loadSection("portfolio", {
-      // Imagenes
+       // NUEVOS CAMPOS DE TÍTULO PRINCIPAL
+      portfolio_subtitle_es: "portfolio-subtitle",
+      portfolio_title_main_es: "portfolio-title-main",
+      // Imagenes
       portfolio_img_1: "portfolio-img-1",
       portfolio_img_2: "portfolio-img-2",
       portfolio_img_3: "portfolio-img-3",
