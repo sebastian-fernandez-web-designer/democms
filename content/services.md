@@ -1,7 +1,6 @@
 ---
 services_background_color: '#000000'
-services_subtitle_color: '#00ff1e'
-services_subtitle_color_en: '#ff8800'
+services_subtitle_color: '#ffd500'
 services_subtitle_es: Servicios
 services_subtitle_en: Services
 services_title_es: Lo Que Ofrecemos
@@ -38,5 +37,6 @@ service_title_4_es: Pregunta
 service_title_4_en: Question
 service_desc_4_es: Siempre tenemos la respuesta que buscas.
 service_desc_4_en: We always have the answer you're looking for.
+services_subtitle_color_en: '#ff8800'
 ---
 
