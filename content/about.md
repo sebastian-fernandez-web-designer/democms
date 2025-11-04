@@ -1,5 +1,5 @@
 ---
-about_background_color: '#63686e'
+about_background_color: '#ffffff'
 about_title_es: Nuestro Portafolio es Perfecto para tu Próximo Proyecto.
 about_title_en: Our Portfolio is Perfect for Your Next Project..
 about_subtitle_es: Este tema cuenta con un menú lateral flexible y fotos de stock gratuitas.
