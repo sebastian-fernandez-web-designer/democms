@@ -1,4 +1,8 @@
 ---
+portfolio_subtitle_es: ÉCHALE UN VISTAZO
+portfolio_subtitle_en: TAKE A LOOK
+portfolio_title_main_es: Nuestros Trabajos Recientes
+portfolio_title_main_en: Our Recent Works
 portfolio_img_1: /img/uploads/portfolio-1.jpg
 portfolio_title_1_es: Diseño UX para App Móvil
 portfolio_title_1_en: Mobile App UX Design
