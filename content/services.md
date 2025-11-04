@@ -1,7 +1,7 @@
 ---
 services_background_color: '#000000'
-services_subtitle_color: '#ffea00'
-services_subtitle_color_en: '#0062ff'
+services_subtitle_color: '#00ff1e'
+services_subtitle_color_en: '#ff8800'
 services_subtitle_es: Servicios
 services_subtitle_en: Services
 services_title_es: Lo Que Ofrecemos
