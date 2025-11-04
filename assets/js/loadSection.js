@@ -541,25 +541,25 @@
     });
   
   
-    loadSection("cta", {
-      // Color de fondo y color de texto
-      cta_background_color: "cta-section",
-      cta_title_text_color: "cta-title",
-  
-      // Título
-      cta_title_es: "cta-title",
-      // cta_title_en: "cta-title-en", // ELIMINADO
-  
-      // Botón 1
-      cta_button_1_text_es: "cta-button-1-text",
-      // cta_button_1_text_en: "cta-button-1-text-en", // ELIMINADO
-      cta_button_1_link: "cta-button-1-link",
-  
-      // Botón 2
-      cta_button_2_text_es: "cta-button-2-text",
-      // cta_button_2_text_en: "cta-button-2-text-en", // ELIMINADO
-      cta_button_2_link: "cta-button-2-link"
-    });
+loadSection("cta", {
+    // Color de fondo y color de texto (sin cambios)
+    cta_background_color: "cta-section",
+    cta_title_text_color: "cta-title", // Mapea al ID unificado del título
+
+    // Título (Solo _es)
+    cta_title_es: "cta-title",
+    // cta_title_en: "cta-title-en", // ELIMINADO
+
+    // Botón 1
+    cta_button_1_text_es: "cta-button-1-link", // Mapea al ID del enlace (correcto)
+    // cta_button_1_text_en: "cta-button-1-text-en", // ELIMINADO
+    cta_button_1_link: "cta-button-1-link",
+
+    // Botón 2
+    cta_button_2_text_es: "cta-button-2-link", // Mapea al ID del enlace (correcto)
+    // cta_button_2_text_en: "cta-button-2-text-en", // ELIMINADO
+    cta_button_2_link: "cta-button-2-link"
+});
   
   
     loadSection("footer", {
