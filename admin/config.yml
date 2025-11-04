@@ -61,7 +61,6 @@ collections:
         fields:
           - { label: "Color de fondo", name: "services_background_color", widget: "color" }
           - { label: "Color del subtítulo/Icono (ES)", name: "services_subtitle_color", widget: "color" }
-          - { label: "Color del subtítulo/Icono (EN)", name: "services_subtitle_color_en", widget: "color" }
           - { label: "Subtítulo (ES)", name: "services_subtitle_es", widget: "string" }
           - { label: "Subtítulo (EN)", name: "services_subtitle_en", widget: "string" }
           - { label: "Título principal (ES)", name: "services_title_es", widget: "string" }
