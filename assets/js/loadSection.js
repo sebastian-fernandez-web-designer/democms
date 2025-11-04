@@ -572,7 +572,34 @@ loadSection("cta", {
       footer_copy_text_es: "footer-copy-text",
       // footer_copy_text_en: "footer-copy-text-en" // ELIMINADO
 });
+// ... (otras llamadas a loadSection aquí)
+// 
+// 1) loadSection para todos los bloques de contenido (adaptado bilingüe)
+//
+// ...
 
+// NUEVA CARGA DE NAVEGACIÓN
+loadSection("navigation", {
+    // LINK 1: Inicio
+    nav_link_1_text_es: "nav-link-1", // Carga texto ES/EN usando la lógica bilingüe
+    nav_link_1_href: "nav-link-1",   // Carga el atributo href
+    
+    // LINK 2: Acerca
+    nav_link_2_text_es: "nav-link-2",
+    nav_link_2_href: "nav-link-2",
+    
+    // LINK 3: Servicios
+    nav_link_3_text_es: "nav-link-3",
+    nav_link_3_href: "nav-link-3",
+    
+    // LINK 4: Portafolio
+    nav_link_4_text_es: "nav-link-4",
+    nav_link_4_href: "nav-link-4",
+    
+    // LINK 5: Contacto
+    nav_link_5_text_es: "nav-link-5",
+    nav_link_5_href: "nav-link-5"
+});
 
 // ------------------------------------------------------------------
 // LÓGICA DEL PRELOADER: ¡AQUÍ!
