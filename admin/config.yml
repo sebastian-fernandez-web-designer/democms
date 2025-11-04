@@ -145,6 +145,12 @@ collections:
         name: "portfolio"
         file: "content/portfolio.md"
         fields:
+            # --- ¡CAMPOS AÑADIDOS AQUÍ! ---
+          - { label: "Subtítulo (ES)", name: "portfolio_subtitle_es", widget: "string", default: "ÉCHALE UN VISTAZO" }
+          - { label: "Subtítulo (EN)", name: "portfolio_subtitle_en", widget: "string", default: "TAKE A LOOK" }
+          - { label: "Título Principal (ES)", name: "portfolio_title_main_es", widget: "string", default: "Nuestros Trabajos Recientes" }
+          - { label: "Título Principal (EN)", name: "portfolio_title_main_en", widget: "string", default: "Our Recent Works" }
+            # -----------------------------
           - { label: "Imagen 1", name: "portfolio_img_1", widget: "image" }
           - { label: "Título imagen 1 (ES)", name: "portfolio_title_1_es", widget: "string" }
           - { label: "Título imagen 1 (EN)", name: "portfolio_title_1_en", widget: "string" }
