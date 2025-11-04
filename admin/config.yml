@@ -12,6 +12,36 @@ collections:
   - name: "site_content"
     label: "Contenido del sitio"
     files: # <- Asegúrate de que tenga los dos puntos y esté alineado con 'name' y 'label'
+
+        # Colección para la barra de navegación lateral
+      - label: "Navegación (Barra Lateral)"
+        name: "navigation"
+        file: "content/navigation.md"
+        fields:
+          # Inicio
+          - { label: "Link 1: Texto (ES)", name: "nav_link_1_text_es", widget: "string", default: "Inicio" }
+          - { label: "Link 1: Texto (EN)", name: "nav_link_1_text_en", widget: "string", default: "Home" }
+          - { label: "Link 1: Enlace (#hash)", name: "nav_link_1_href", widget: "string", default: "#page-top" }
+    
+          # Acerca
+          - { label: "Link 2: Texto (ES)", name: "nav_link_2_text_es", widget: "string", default: "Acerca" }
+          - { label: "Link 2: Texto (EN)", name: "nav_link_2_text_en", widget: "string", default: "About" }
+          - { label: "Link 2: Enlace (#hash)", name: "nav_link_2_href", widget: "string", default: "#about" }
+
+          # Servicios
+          - { label: "Link 3: Texto (ES)", name: "nav_link_3_text_es", widget: "string", default: "Servicios" }
+          - { label: "Link 3: Texto (EN)", name: "nav_link_3_text_en", widget: "string", default: "Services" }
+          - { label: "Link 3: Enlace (#hash)", name: "nav_link_3_href", widget: "string", default: "#services" }
+
+          # Portfolio
+          - { label: "Link 4: Texto (ES)", name: "nav_link_4_text_es", widget: "string", default: "Portafolio" }
+          - { label: "Link 4: Texto (EN)", name: "nav_link_4_text_en", widget: "string", default: "Portfolio" }
+          - { label: "Link 4: Enlace (#hash)", name: "nav_link_4_href", widget: "string", default: "#portfolio" }
+
+          # Contacto
+          - { label: "Link 5: Texto (ES)", name: "nav_link_5_text_es", widget: "string", default: "Contacto" }
+          - { label: "Link 5: Texto (EN)", name: "nav_link_5_text_en", widget: "string", default: "Contact" }
+          - { label: "Link 5: Enlace (#hash)", name: "nav_link_5_href", widget: "string", default: "#contact" }
       
 # HEADER
       - label: "Header"
