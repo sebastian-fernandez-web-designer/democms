@@ -2,7 +2,7 @@ backend:
   name: github
   repo: Sebsatian2025/democms
   branch: main
-  token: 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
+  token: 
   base_url: https://api.github.com
 
 media_folder: "img/uploads"
